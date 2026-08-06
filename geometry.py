@@ -21,6 +21,8 @@ def capsule_profile(rn, rs, r_theta):
     -------
     X, Y : ndarray
         Axial and radial coordinates of the meridional profile [m].
+    breaks: dict
+        Node-index boundaries between segments: "torid_start", "cone_start", "Rear_start"
 
     Raises
     ------
@@ -75,8 +77,17 @@ def capsule_profile(rn, rs, r_theta):
     
     X = np.concatenate([X_ns, X_t, X_c, X_rs])
     Y = np.concatenate([Y_ns, Y_t, Y_c, Y_rs])
+    
+    # node-index boundaries between the four meridional segments
+    # (used by the local-inclination method to tag each panel as
+    #  blunt-nose vs low-inclination afterbody, per Dirkx & Mooij)
+    breaks = {
+        "toroid_start": len(X_ns),                      # end of nose sphere
+        "cone_start"  : len(X_ns) + len(X_t),           # end of torid sphere
+        "rear_start"  : len(X_ns) + len(X_t) + len(X_c) # end of cone  
+    }
 
     if not np.all(np.isfinite(X)) or not np.all(np.isfinite(Y)):
         raise ValueError("Geometry contains non-finite values.")
 
-    return X, Y
+    return X, Y, breaks

@@ -137,6 +137,24 @@ omega_earth = 7.292115e-5   # Earth sidereal rotation rate [rad s^-1]
 mach_nodes = np.array([3, 4, 5, 6, 8, 10, 15, 20, 25], dtype=float)
 aoa_nodes = np.linspace(-5, 35, 41)
 
+#=======================================================================================
+#                               Local Inclination Methods specification
+#=======================================================================================
+
+mach_law = np.linspace(3, 25, 23)
+theta_law = np.linspace(-89, 90, 180)
+AERO_METHOD = 'lim'
+
+M_LOW_MAX  = 12.0
+M_HIGH_MIN = 5.0
+
+CONE_MACHS  = np.linspace(3.0, 12.0, 19)
+CONE_THETAS = np.linspace(0.0, 75, 31) 
+CONE_CACHE  = "cp_cone_table.npz"
+
+PRANDTL_MACHS  = np.linspace(3.0, 25.0, 23)   # Prandtl-Meyer table: Mach grid
+PRANDTL_THETAS = np.linspace(0.0, 89.0, 45)   # expansion angle |theta| [deg]
+
 
 #=======================================================================================
 #                            Constraint limits

@@ -1,5 +1,4 @@
 """Derived geometric and inertial properties of the capsule."""
-
 import numpy as np
 import scipy as sp
 
@@ -7,6 +6,9 @@ from . import config
 from .geometry import capsule_profile
 from .parameterization import cap_params, normalized_param
 
+# Local-inclination part tags
+PART_NOSE = 0   # blunt forebody (nose sphere + shoulder) -> Modified Newtonian 
+PART_AFTERBODY = 1 # low-inclination afterbody (cone + rear) -> tangent-cone/Newtonian
 
 def get_capsule_properties(rn, rs, r_theta, cg_params=(0.5, 0.7)):
     """Compute the capsule geometric properties and center-of-gravity model.
@@ -46,7 +48,7 @@ def get_capsule_properties(rn, rs, r_theta, cg_params=(0.5, 0.7)):
 
     # ========== geometry ================
 
-    X, Y = capsule_profile(rn, rs, r_theta)
+    X, Y, breaks = capsule_profile(rn, rs, r_theta)
 
     # ========== maximum body radius ==========
 
@@ -64,6 +66,12 @@ def get_capsule_properties(rn, rs, r_theta, cg_params=(0.5, 0.7)):
     X_mid = 0.5 * (X[:-1] + X[1:])
     Z_mid = 0.5 * (Y[:-1] + Y[1:])
 
+   #=========== local-inclination part tag =========
+   # nose spher + shoulder = blunt forebody; cone + rear sphere = afterbody.
+
+    panel_part = np.where(np.arange(X_mid.size) < breaks['cone_start'], 
+                        PART_NOSE, PART_AFTERBODY)
+ 
    # ========== outwards unit normal ================
 
     ds_safe = np.where(ds < config.eps, config.eps, ds)
@@ -103,7 +111,8 @@ def get_capsule_properties(rn, rs, r_theta, cg_params=(0.5, 0.7)):
         "X_cg" : x_cg,
         "Z_cg" : z_cg,
         "L_ref": L_ref,
-        "theta_sp1": theta_ns_max,
-        "surf_area": surf_area,
-        "volume"   : volume
+        "theta_sp1" : theta_ns_max,
+        "surf_area" : surf_area,
+        "volume"    : volume,
+        "panel_part": panel_part        
     }
