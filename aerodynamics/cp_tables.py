@@ -1,8 +1,8 @@
-import config
+from .. import config
 import numpy as np
-from shocks import cp_tangent_cone
-from newtonian import cp_newtonian
-from expansion import cp_prandtl_meyer
+from .shocks import cp_tangent_cone
+from .newtonian import cp_newtonian
+from .expansion import cp_prandtl_meyer
 
 
 
@@ -47,7 +47,10 @@ def clean_cone_table(table, gamma=config.gamma):
 def load_cone_table():
     """Load cached cone table; build + save it on first use (one-time, ~3-6 min)."""
     import os
-    path = os.path.join(os.path.dirname(__file__), CONE_CACHE)
+    # Resolve against the PARENT package dir (capsule_opt/), where the single
+    # cp_cone_table.npz lives, so we reuse it instead of rebuilding a 3-6 min
+    # duplicate inside aerodynamics/. __file__ = .../capsule_opt/aerodynamics/cp_tables.py
+    path = os.path.join(os.path.dirname(os.path.dirname(__file__)), CONE_CACHE)
     if os.path.exists(path):
         return np.load(path)["table"]
     print(f"Building tangent-cone table (one-time, ~3-6 min) -> {path}")

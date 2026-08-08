@@ -1,4 +1,4 @@
-import config
+from .. import config
 import numpy as np
 from scipy.optimize import brentq
 
@@ -93,9 +93,16 @@ def cp_tangent_cone(M, theta_deg, gamma=config.gamma):
             return None
 
     Mn1, delta, V2 = shock_post(M, beta, gamma)
-    u_s, _         = tm_integrate(V2 * np.cos(beta - delta),
-                          -V2 * np.sin(beta - delta),
-                          beta, thc, gamma, n=300)
+    # Final high-resolution surface integration. tm_integrate returns None if the
+    # RK4 hits the sonic singularity before reaching the surface -- a marginal /
+    # near-detached root. Treat that as "no attached solution" (contract: None),
+    # matching the other None-returning paths instead of crashing on unpack.
+    surf = tm_integrate(V2 * np.cos(beta - delta),
+                        -V2 * np.sin(beta - delta),
+                        beta, thc, gamma, n=300)
+    if surf is None:
+        return None
+    u_s, _ = surf
 
     As  = 1 - (gamma - 1) / 2 * u_s ** 2
     Ms2 = u_s ** 2 / As
