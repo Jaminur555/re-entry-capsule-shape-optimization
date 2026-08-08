@@ -38,7 +38,7 @@ def cp_cone_interp(M, theta_deg):
     """Windward afterbody Cp from the cached cone table (bilinear in M, theta)."""
     return interp_cp(CP_CONE, CONE_MACHS, CONE_THETAS, M, theta_deg)
 
-# Eager build/load at import (one-time build, then instant .npz load).
+# Eager build/load at import (one-time build, then instant CSV load).
 CP_CONE = load_cone_table()
 
 

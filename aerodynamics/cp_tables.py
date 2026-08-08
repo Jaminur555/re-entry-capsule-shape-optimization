@@ -45,18 +45,34 @@ def clean_cone_table(table, gamma=config.gamma):
 
 
 def load_cone_table():
-    """Load cached cone table; build + save it on first use (one-time, ~3-6 min)."""
+    """Load the cached cone table; build + save it on first use (one-time, ~3-6 min).
+
+    The cache is a human-readable CSV (rows = Mach, columns = theta-deg, with
+    header labels) so it can be inspected or edited in any spreadsheet. Mach and
+    theta grids still come from config; only the Cp grid is stored. Resolved
+    against the PARENT package dir (capsule_opt/) so a single copy is reused."""
     import os
-    # Resolve against the PARENT package dir (capsule_opt/), where the single
-    # cp_cone_table.npz lives, so we reuse it instead of rebuilding a 3-6 min
-    # duplicate inside aerodynamics/. __file__ = .../capsule_opt/aerodynamics/cp_tables.py
     path = os.path.join(os.path.dirname(os.path.dirname(__file__)), CONE_CACHE)
     if os.path.exists(path):
-        return np.load(path)["table"]
+        return _read_cone_csv(path)
     print(f"Building tangent-cone table (one-time, ~3-6 min) -> {path}")
     table = clean_cone_table(build_cone_table())
-    np.savez(path, table=table, machs=CONE_MACHS, thetas=CONE_THETAS)
+    _write_cone_csv(path, table)
     return table
+
+
+def _read_cone_csv(path):
+    """Read a labeled cone-table CSV -> (nMach, nTheta) Cp array."""
+    data = np.loadtxt(path, delimiter=",", skiprows=1)
+    return data[:, 1:]                        # drop the Mach-label first column
+
+
+def _write_cone_csv(path, table):
+    """Write the cone table as a labeled CSV (Mach rows, theta-deg columns)."""
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("Mach\\theta_deg," + ",".join(f"{t:g}" for t in CONE_THETAS) + "\n")
+        for i, M in enumerate(CONE_MACHS):
+            f.write(f"{M:g}," + ",".join(f"{v:.8f}" for v in table[i]) + "\n")
 
 
 

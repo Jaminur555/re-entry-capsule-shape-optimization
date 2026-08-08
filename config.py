@@ -150,7 +150,7 @@ M_HIGH_MIN = 5.0
 
 CONE_MACHS  = np.linspace(3.0, 12.0, 19)
 CONE_THETAS = np.linspace(0.0, 75, 31) 
-CONE_CACHE  = "cp_cone_table.npz"
+CONE_CACHE  = "cp_cone_table.csv"
 
 PRANDTL_MACHS  = np.linspace(3.0, 25.0, 23)   # Prandtl-Meyer table: Mach grid
 PRANDTL_THETAS = np.linspace(0.0, 89.0, 45)   # expansion angle |theta| [deg]
