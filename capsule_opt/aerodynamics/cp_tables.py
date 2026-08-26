@@ -1,5 +1,7 @@
-from .. import config
 import numpy as np
+import os
+
+from .. import config
 from .shocks import cp_tangent_cone
 from .newtonian import cp_newtonian
 from .expansion import cp_prandtl_meyer
@@ -53,6 +55,15 @@ def load_cone_table():
     against the PARENT package dir (capsule_opt/) so a single copy is reused."""
 
     path = config.CONE_CACHE
+
+    if os.path.exists(path):
+        table = read_cone_csv(path)
+        if table.shape == (CONE_MACHS.size, CONE_THETAS.size):
+            return table
+        print(f"Cahched cone table at {path} has the wrong shape"
+              f"{table.shape} (expected {(CONE_MACHS.size, CONE_THETAS.size)}); rebuilding.")
+
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     print(f"Building tangent-cone table (one-time, ~3-6 min) -> {path}")
     table = clean_cone_table(build_cone_table())
     write_cone_csv(path, table)

@@ -1,1 +1,1 @@
-from trim_solver import trim_alpha, Cm_at
+from .trim_solver import trim_alpha, Cm_at

@@ -25,6 +25,6 @@ Typical usage::
     from capsule_opt import main
     main()
 """
-from .Optimization import CapsuleOptimization, evaluate_shape
+from .optimization import CapsuleOptimization, evaluate_shape
 
 __all__ = [ "CapsuleOptimization", "evaluate_shape"]

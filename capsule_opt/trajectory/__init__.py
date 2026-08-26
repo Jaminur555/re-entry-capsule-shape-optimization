@@ -1,1 +1,1 @@
-from trajectory import propagate_trajectory
+from .trajectory import propagate_trajectory

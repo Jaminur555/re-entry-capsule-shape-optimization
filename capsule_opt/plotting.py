@@ -187,7 +187,7 @@ def print_tradeoff_table(res):
         print(f"{x_opt[0]:6.3f} {x_opt[1]:6.3f} {x_opt[2]:8.3f} | {eta_V_phys[i]:7.4f} {Qs_phys[i]/1e6:10.2f} {sg_phys[i]/1e3:7.1f}")
 
 
-def save_results(res, outdir="Final_result_25000"):
+def save_results(res, outdir="results/pareto_fronts"):
     """Persist the Pareto-front designs for the Results chapter / Appendix.
 
     Writes, under ``outdir``:

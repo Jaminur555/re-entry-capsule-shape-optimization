@@ -10,7 +10,7 @@ from pymoo.operators.sampling.lhs import LHS
 from pymoo.optimize import minimize
 
 from capsule_opt import plotting
-from .capsule_opt.optimization import CapsuleOptimization
+from capsule_opt.optimization import CapsuleOptimization
 
 
 def main(n_cores=4, pop_size=100, n_gen=250, seed=42):
@@ -65,7 +65,7 @@ def main(n_cores=4, pop_size=100, n_gen=250, seed=42):
     print(f"Total time taken to done this Optimization: {t1 - t0}")
     print(f"Number of optimal trade-off solutions found: {len(res.F)}")
 
-    # ---- analyze result ----
+    # Analyze the result
     if res.F is not None and len(res.F) > 0:
         plotting.save_results(res)
         p = plotting.unpack_pareto(res)
@@ -74,16 +74,16 @@ def main(n_cores=4, pop_size=100, n_gen=250, seed=42):
 
         plotting.print_tradeoff_table(res)
 
-        plotting.plot_pareto_3d(res, fname="Pareto_Front_3D.png")
+        plotting.plot_pareto_3d(res, fname="results/figures/Pareto_Front_3D.png")
 
         plotting.plot_shadow_pareto(res, rn_arr, r"$r_{R_N}$ [-]", cmap='viridis',
-                                    title=r"Pareto Front — Nose Radius Parameter $r_{R_N}$ [-]", fname="Pareto_Rn.png")
+                            title=r"Pareto Front — Nose Radius Parameter $r_{R_N}$ [-]", fname="results/figures/Pareto_Rn.png")
         plotting.plot_shadow_pareto(res, rs_arr, r"$r_{R_S}$ [-]", cmap='viridis',
-                                    title=r"Pareto Front — Shoulder Radius Parameter $r_{R_S}$ [-]", fname="Pareto_Rs.png")
+                            title=r"Pareto Front — Shoulder Radius Parameter $r_{R_S}$ [-]", fname="results/figures/Pareto_Rs.png")
         plotting.plot_shadow_pareto(res, r_theta_arr, r"$r_{\theta_c}$ [-]", cmap='viridis',
-                                    title=r"Pareto Front — Cone Angle Parameter $r_{\theta_c}$ [-]", fname="Pareto_r_theta.png")
+                            title=r"Pareto Front — Cone Angle Parameter $r_{\theta_c}$ [-]", fname="results/figures/Pareto_r_theta.png")
         plotting.plot_shadow_pareto(res, Qs_phys / 1e7, r"Heat Load $Q_s$ [J/m²] $\times 10^7$", cmap='magma',
-                                    title=r"Pareto Front — StagnationHeat Load $Q_s$ [J/m²] $\times 10^7$", fname="Pareto_Heat_Load.png")
+                            title=r"Pareto Front — StagnationHeat Load $Q_s$ [J/m²] $\times 10^7$", fname="results/figures/Pareto_Heat_Load.png")
     else:
         print("No feasible solutions found")
 

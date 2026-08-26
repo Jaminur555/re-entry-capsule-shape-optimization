@@ -3,7 +3,7 @@ import numpy as np
 import scipy as sp
 
 from . import config
-from .Geometry import capsule_profile, cap_params, normalized_param
+from .geometry import capsule_profile, cap_params, normalized_param
 
 # Local-inclination part tags
 PART_NOSE = 0   # blunt forebody (nose sphere + shoulder) -> Modified Newtonian 
