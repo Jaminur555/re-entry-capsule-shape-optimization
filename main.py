@@ -9,8 +9,8 @@ from pymoo.operators.mutation.pm import PM
 from pymoo.operators.sampling.lhs import LHS
 from pymoo.optimize import minimize
 
-from . import plotting
-from .optimization import CapsuleOptimization
+from capsule_opt import plotting
+from .capsule_opt.optimization import CapsuleOptimization
 
 
 def main(n_cores=4, pop_size=100, n_gen=250, seed=42):
