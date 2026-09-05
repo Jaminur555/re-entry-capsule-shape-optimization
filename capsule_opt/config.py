@@ -134,12 +134,17 @@ H_ATM_MAX = H_EXT[-1]     # 120000 m -- upper limit of the atmosphere model
 
 omega_earth = 7.292115e-5   # Earth sidereal rotation rate [rad s^-1]
 
+# bank-angle guidance smoothing (trajectory/trajectory.py): first-order lag
+# with rate cap applied to the no-skip bank command
+bank_gain    = 10.0        # [-]     lag gain (1/s) tracking the commanded bank
+bank_rate_max = np.deg2rad(5.0)  # [rad/s] max bank rate (~5 deg/s, RCS-class)
+
 
 #=======================================================================================
 #                            Aerodynamic database grid
 #=======================================================================================
 
-mach_nodes = np.array([3, 4, 5, 6, 8, 10, 15, 20, 25], dtype=float)
+mach_nodes = np.array([3, 4, 5, 6, 8, 10, 15, 20, 25, 30], dtype=float)
 aoa_nodes = np.linspace(-5, 35, 41)
 
 #=======================================================================================

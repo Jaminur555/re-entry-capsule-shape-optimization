@@ -8,7 +8,13 @@ from ..atmosphere import atmosphere, mach_from_velocity
 
 
 def bank_angle_sigma(m, L_force, V, h, gamma, lat, chi):
-    """Bank angle 'sigma' that cancels the out-of-plane acceleration (no-skip).
+    """Bank angle 'sigma' enforcing the no-skip condition gamma_dot <= 0.
+
+    Follows Dirkx & Mooij (2017) Eq. (2.41): cos(sigma) = (m/L) * [(g - V^2/r)
+    * cos(gamma) - 2*omega*V*cos(lat)*sin(chi)].  Per their Sect. 2.3.1 the
+    modulation is only active while cos(sigma) lies in (0, 1) (lift dominant);
+    outside that regime the bank is set to 0 deg (full lift up), never past
+    90 deg.
 
     Parameters
     ----------
@@ -23,23 +29,29 @@ def bank_angle_sigma(m, L_force, V, h, gamma, lat, chi):
     Returns
     -------
     float
-        Bank angle [rad].
+        Bank angle [rad], in [0, pi/2].
     """
     r     = config.r_earth + h
     g     = config.go * (config.r_earth / r) ** 2
     Vc2   = g * r
     cos_s = (m / max(L_force, 1e-6)) * (g * (1 - V ** 2 / Vc2) * np.cos(gamma) -
                                  2 * config.omega_earth * V * np.cos(lat) * np.sin(chi))
-    return float(np.arccos(np.clip(cos_s, -1, 1)))
+    # Eq. (2.41) active only while 0 < cos(sigma) < 1 (lift dominant, bank
+    # left); otherwise full lift up (sigma = 0), never banked past 90 deg.
+    return float(np.arccos(cos_s)) if 0.0 < cos_s < 1.0 else 0.0
 
 
 def entry_eom(t, state, m, A_ref, interp_CD, interp_CL, alpha_trim_arr):
     """Point-mass entry equations of motion over a spherical, rotating Earth.
 
-    State vector "state = [h, V, gamma, lat, lon, chi]". Aerodynamic
+    State vector "state = [h, V, gamma, lat, lon, chi, sigma]". Aerodynamic
     coefficients are read from the supplied interpolators at the trim AoA.
+    The bank angle follows the no-skip command of ``bank_angle_sigma``
+    through a first-order lag capped at ``config.bank_rate_max`` [rad/s],
+    which smooths the discontinuous on/off of the modulation (bank
+    reversal) and mirrors the finite roll rate of a real vehicle.
     """
-    h, V, gamma, lat, lon, chi = state
+    h, V, gamma, lat, lon, chi, sigma = state
     h = max(float(h), 0.0)
 
     # atmospheric state
@@ -56,8 +68,10 @@ def entry_eom(t, state, m, A_ref, interp_CD, interp_CL, alpha_trim_arr):
     D = q * A_ref * CD                # drag force [N]
     L = q * A_ref * abs(CL)           # lift force magnitude [N]
 
-    # bank angle (no-skip condition)
-    sigma = bank_angle_sigma(m, L, V, h, gamma, lat, chi)
+    # bank angle command (no-skip condition) tracked with rate cap + lag
+    sigma_cmd = bank_angle_sigma(m, L, V, h, gamma, lat, chi)
+    dsigma = float(np.clip((sigma_cmd - sigma) * config.bank_gain,
+                           -config.bank_rate_max, config.bank_rate_max))
 
     # altitude-corrected gravity
     r     = config.r_earth + h
@@ -72,7 +86,7 @@ def entry_eom(t, state, m, A_ref, interp_CD, interp_CL, alpha_trim_arr):
             - 2 * config.omega_earth * (np.cos(chi) * np.tan(gamma) * np.cos(lat) - np.sin(lat)))
     dgamma = ((L * np.cos(sigma) / (m * V)) - (g / V - V / r) * np.cos(gamma) + 2.0 * config.omega_earth * np.cos(lat) * np.sin(chi))
 
-    return [dh, dV, dgamma, dlat, dlon, dchi]
+    return [dh, dV, dgamma, dlat, dlon, dchi, dsigma]
 
 
 def mach3_event(t, state, *args):
@@ -124,7 +138,7 @@ def propagate_trajectory(rn, rs, r_theta, m,
     """
     state0 = [ho, Vo,
               np.deg2rad(gamma0_deg), np.deg2rad(lat0_deg),
-              np.deg2rad(lon0_deg), np.deg2rad(chi0_deg)]
+              np.deg2rad(lon0_deg), np.deg2rad(chi0_deg), 0.0]
 
     sol = solve_ivp(
         entry_eom, [0.0, t_max], state0,
@@ -142,6 +156,7 @@ def propagate_trajectory(rn, rs, r_theta, m,
     lat_arr = sol.y[3]
     lon_arr = sol.y[4]
     chi_arr = sol.y[5]
+    sig_arr = np.clip(sol.y[6], 0.0, np.pi / 2)
 
     h_clipped = np.maximum(h_arr, 0.0)
     rho_arr   = np.array([atmosphere(h)['rho'] for h in h_clipped])
@@ -166,6 +181,7 @@ def propagate_trajectory(rn, rs, r_theta, m,
         'lat_deg'   : np.rad2deg(lat_arr),
         'lon_deg'   : np.rad2deg(lon_arr),
         'chi_deg'   : np.rad2deg(chi_arr),
+        'bank_deg'  : np.rad2deg(sig_arr),
         'Mach'      : Mach_arr,
         'q_dyn'     : q_arr,
         'alpha_trim': at_arr,

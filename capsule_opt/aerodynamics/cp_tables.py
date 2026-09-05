@@ -28,20 +28,42 @@ def build_cone_table(gamma=config.gamma, quiet=False):
 
 
 def clean_cone_table(table, gamma=config.gamma):
-    """Post-process the raw cone table to be NaN-free and monotone in theta:
-       (1) detached cells (NaN) <- modified-Newtonian Cp (Dirkx's detached-shock
-       fallback); (2) per Mach row, walk from high theta downwards and clamp
-       Cp[j] = min(Cp[j], Cp[j+1]) to remove low-theta spikes (spurious
-       strong-shock-branch roots near the Mach angle). Correct cells untouched."""
+    """Post-process the raw cone table to be NaN-free and monotone in theta.
+
+    (1) Remove low-theta spikes among the attached cells (spurious
+        strong-shock-branch roots near the Mach angle): walking right-to-left,
+        no attached cell may exceed the next attached cell to its right.
+    (2) Fill detached cells (NaN) with the LARGER of the modified-Newtonian
+        fallback (Dirkx's detached-shock treatment) and the last attached
+        cone Cp. Taking the max keeps Cp from DROPPING when the shock
+        detaches -- a plain Newtonian fill sits below the last attached
+        value at high theta (e.g. M=10: fill ~1.30 vs attached 1.465 at
+        55 deg), which used to drag valid cells down via the monotone
+        enforcement and biased the afterbody Cp low.
+    """
     cleaned = np.array(table, dtype=float)
+    n = CONE_THETAS.size
     for i, M in enumerate(CONE_MACHS):
-        row      = cleaned[i]
-        nan_mask = np.isnan(row)
-        if nan_mask.any():
-            row[nan_mask] = cp_newtonian(M, CONE_THETAS[nan_mask], gamma)
-        for j in range(CONE_THETAS.size - 2, -1, -1):
-            if row[j] > row[j + 1]:
-                row[j] = row[j + 1]
+        row = cleaned[i]
+
+        # (1) spike removal among attached cells (NaN cells skipped)
+        for j in range(n - 2, -1, -1):
+            if np.isnan(row[j]):
+                continue
+            k = j + 1
+            while k < n and np.isnan(row[k]):
+                k += 1
+            if k < n and row[j] > row[k]:
+                row[j] = row[k]
+
+        # (2) detached fill: max(Newtonian, last attached value)
+        run_max = -np.inf
+        for j in range(n):
+            if np.isnan(row[j]):
+                fill = cp_newtonian(M, CONE_THETAS[j], gamma)
+                row[j] = fill if not np.isfinite(run_max) else max(fill, run_max)
+            else:
+                run_max = max(run_max, row[j])
         cleaned[i] = row
     return cleaned
 

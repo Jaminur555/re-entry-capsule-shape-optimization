@@ -1,0 +1,1045 @@
+[
+ {
+  "id": "V0-anchors",
+  "description": "US-76 layer-base anchors (T/p/rho)",
+  "verdict": "PASS",
+  "details": "worst rel dev 2.14e-05",
+  "timestamp": "2026-09-03T13:09:25"
+ },
+ {
+  "id": "V0-gas-law",
+  "description": "p = rho R T below the homopause",
+  "verdict": "PASS",
+  "details": "max rel dev 2.22e-16",
+  "timestamp": "2026-09-03T13:09:25"
+ },
+ {
+  "id": "V0-join86",
+  "description": "continuity at the 86 km table join",
+  "verdict": "PASS",
+  "details": "T 4.16e-04 P 3.57e-04 rho 3.20e-04",
+  "timestamp": "2026-09-03T13:09:25"
+ },
+ {
+  "id": "V0-monotone",
+  "description": "rho strictly decreasing 0-120 km",
+  "verdict": "PASS",
+  "details": "",
+  "timestamp": "2026-09-03T13:09:25"
+ },
+ {
+  "id": "V0-ext-nodes",
+  "description": "86-120 km interpolation hits table nodes",
+  "verdict": "PASS",
+  "details": "worst rel dev 4.07e-04",
+  "timestamp": "2026-09-03T13:09:25"
+ },
+ {
+  "id": "V0-sound",
+  "description": "sea-level speed of sound",
+  "verdict": "PASS",
+  "details": "a0 = 340.294 m/s (ref 340.294)",
+  "timestamp": "2026-09-03T13:09:25"
+ },
+ {
+  "id": "V1a-MN-M3",
+  "description": "Modified Newtonian Cp vs Fig 3.5 (M=3)",
+  "verdict": "PASS",
+  "details": "max|dCp|=0.0083 at theta=29.7 deg",
+  "timestamp": "2026-09-03T13:09:26"
+ },
+ {
+  "id": "V1a-MN-M5",
+  "description": "Modified Newtonian Cp vs Fig 3.5 (M=5)",
+  "verdict": "PASS",
+  "details": "max|dCp|=0.0257 at theta=66.3 deg",
+  "timestamp": "2026-09-03T13:09:26"
+ },
+ {
+  "id": "V1a-MN-M10",
+  "description": "Modified Newtonian Cp vs Fig 3.5 (M=10)",
+  "verdict": "PASS",
+  "details": "max|dCp|=0.0151 at theta=14.2 deg",
+  "timestamp": "2026-09-03T13:09:26"
+ },
+ {
+  "id": "V1a-MN-Minf",
+  "description": "Modified Newtonian Cp vs Fig 3.5 (M=inf)",
+  "verdict": "PASS",
+  "details": "max|dCp|=0.0261 at theta=58.0 deg",
+  "timestamp": "2026-09-03T13:09:26"
+ },
+ {
+  "id": "V1b-TC-M3",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=3)",
+  "verdict": "FAIL",
+  "details": "max|dCp| core=0.2075, full=0.3162 (theta<=70)",
+  "timestamp": "2026-09-03T13:09:28"
+ },
+ {
+  "id": "V1b-TC-M5",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=5)",
+  "verdict": "FAIL",
+  "details": "max|dCp| core=0.1098, full=0.2855 (theta<=70)",
+  "timestamp": "2026-09-03T13:09:28"
+ },
+ {
+  "id": "V1b-TC-M10",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=10)",
+  "verdict": "FAIL",
+  "details": "max|dCp| core=0.1015, full=0.2343 (theta<=70)",
+  "timestamp": "2026-09-03T13:09:28"
+ },
+ {
+  "id": "V1b-TC-benchmarks",
+  "description": "direct TM solver vs analytic benchmarks",
+  "verdict": "PASS",
+  "details": "max|dCp| 0.0003",
+  "timestamp": "2026-09-03T13:09:30"
+ },
+ {
+  "id": "V1b-TC-table",
+  "description": "cached production table vs benchmarks",
+  "verdict": "FAIL",
+  "details": "max|dCp| 0.1621",
+  "timestamp": "2026-09-03T13:09:30"
+ },
+ {
+  "id": "V1c-nu",
+  "description": "Prandtl-Meyer angle nu(M) vs published anchors",
+  "verdict": "PASS",
+  "details": "max dev 0.005 deg",
+  "timestamp": "2026-09-03T13:09:31"
+ },
+ {
+  "id": "V1c-closed-form",
+  "description": "Cp(0)=0, monotone in theta, vacuum clamp beyond nu(M)",
+  "verdict": "FAIL",
+  "details": "",
+  "timestamp": "2026-09-03T13:09:31"
+ },
+ {
+  "id": "V1c-table",
+  "description": "cached PM table vs closed form",
+  "verdict": "FAIL",
+  "details": "max|dCp| 1.39e-01",
+  "timestamp": "2026-09-03T13:09:31"
+ },
+ {
+  "id": "V1d-weight",
+  "description": "blend weight endpoints + monotone + midpoint",
+  "verdict": "PASS",
+  "details": "w(5)=0.0e+00, w(12)=1.000000000000, w(8.5)=0.500",
+  "timestamp": "2026-09-03T13:09:32"
+ },
+ {
+  "id": "V1d-continuity",
+  "description": "afterbody Cp continuous across M in [5,12]",
+  "verdict": "PASS",
+  "details": "max |dCp| per 0.01 in M = 1.53e-03",
+  "timestamp": "2026-09-03T13:09:33"
+ },
+ {
+  "id": "V1d-finite",
+  "description": "law finite over theta in [-85,85], M in [3,30]",
+  "verdict": "PASS",
+  "details": "",
+  "timestamp": "2026-09-03T13:09:33"
+ },
+ {
+  "id": "V3b-shoulder-ratio",
+  "description": "shoulder/stagnation ratio vs thesis Table 4.1 sources",
+  "verdict": "PASS",
+  "details": "worst 10.2% at M=8, alpha=30 deg",
+  "timestamp": "2026-09-03T13:15:51"
+ },
+ {
+  "id": "V3b-trends",
+  "description": "ratio rises with alpha, falls with Rs",
+  "verdict": "PASS",
+  "details": "",
+  "timestamp": "2026-09-03T13:15:51"
+ },
+ {
+  "id": "V3a-ZS-rs00",
+  "description": "Zoby-Sullivan Rs/Rm=0.00 curve vs independent digitization",
+  "verdict": "FAIL",
+  "details": "max|d(Rm/Reff)|=0.0250 at Rm/Rn=0.98",
+  "timestamp": "2026-09-03T13:16:15"
+ },
+ {
+  "id": "V3a-ZS-rs10",
+  "description": "Zoby-Sullivan Rs/Rm=0.10 curve vs independent digitization",
+  "verdict": "FAIL",
+  "details": "max|d(Rm/Reff)|=0.0248 at Rm/Rn=0.98",
+  "timestamp": "2026-09-03T13:16:15"
+ },
+ {
+  "id": "V3a-ZS-rs20",
+  "description": "Zoby-Sullivan Rs/Rm=0.20 curve vs independent digitization",
+  "verdict": "FAIL",
+  "details": "max|d(Rm/Reff)|=0.0261 at Rm/Rn=0.98",
+  "timestamp": "2026-09-03T13:16:15"
+ },
+ {
+  "id": "V3a-ZS-rs25",
+  "description": "Zoby-Sullivan Rs/Rm=0.25 curve vs independent digitization",
+  "verdict": "FAIL",
+  "details": "max|d(Rm/Reff)|=0.0250 at Rm/Rn=0.98",
+  "timestamp": "2026-09-03T13:16:15"
+ },
+ {
+  "id": "V3a-ZS-rs30",
+  "description": "Zoby-Sullivan Rs/Rm=0.30 curve vs independent digitization",
+  "verdict": "FAIL",
+  "details": "max|d(Rm/Reff)|=0.0250 at Rm/Rn=0.98",
+  "timestamp": "2026-09-03T13:16:15"
+ },
+ {
+  "id": "V3a-ZS-all",
+  "description": "Zoby-Sullivan chart, all five curves",
+  "verdict": "FAIL",
+  "details": "worst |d(Rm/Reff)|=0.0261",
+  "timestamp": "2026-09-03T13:16:15"
+ },
+ {
+  "id": "V3a-ZS-rs00",
+  "description": "Zoby-Sullivan Rs/Rm=0.00, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0086",
+  "timestamp": "2026-09-03T13:17:02"
+ },
+ {
+  "id": "V3a-ZS-rs10",
+  "description": "Zoby-Sullivan Rs/Rm=0.10, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0123",
+  "timestamp": "2026-09-03T13:17:02"
+ },
+ {
+  "id": "V3a-ZS-rs20",
+  "description": "Zoby-Sullivan Rs/Rm=0.20, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0136",
+  "timestamp": "2026-09-03T13:17:02"
+ },
+ {
+  "id": "V3a-ZS-rs25",
+  "description": "Zoby-Sullivan Rs/Rm=0.25, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0143",
+  "timestamp": "2026-09-03T13:17:02"
+ },
+ {
+  "id": "V3a-ZS-rs30",
+  "description": "Zoby-Sullivan Rs/Rm=0.30, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0117",
+  "timestamp": "2026-09-03T13:17:02"
+ },
+ {
+  "id": "V3a-ZS-all",
+  "description": "Zoby-Sullivan chart, all curves, design space",
+  "verdict": "PASS",
+  "details": "worst |d(Rm/Reff)|=0.0143",
+  "timestamp": "2026-09-03T13:17:02"
+ },
+ {
+  "id": "V3a-ZS-edge",
+  "description": "chart edge Rm/Rn>0.7 (informational, outside design space)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0261 near x=0.98: coarse-grid artifact of the in-code table's last 0.9->1.0 segment; the true curve curls to ~1.01. Unused in production (Rm/Rn <= 0.67).",
+  "timestamp": "2026-09-03T13:17:02"
+ },
+ {
+  "id": "V1b-TC-M3",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=3)",
+  "verdict": "PASS",
+  "details": "max|dCp| core=0.0457, full=0.3162 (theta<=70)",
+  "timestamp": "2026-09-03T13:18:28"
+ },
+ {
+  "id": "V1b-TC-M5",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=5)",
+  "verdict": "FAIL",
+  "details": "max|dCp| core=0.0605, full=0.2855 (theta<=70)",
+  "timestamp": "2026-09-03T13:18:28"
+ },
+ {
+  "id": "V1b-TC-M10",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=10)",
+  "verdict": "PASS",
+  "details": "max|dCp| core=0.0462, full=0.2343 (theta<=70)",
+  "timestamp": "2026-09-03T13:18:28"
+ },
+ {
+  "id": "V1b-TC-benchmarks",
+  "description": "direct TM solver vs analytic benchmarks",
+  "verdict": "PASS",
+  "details": "max|dCp| 0.0003",
+  "timestamp": "2026-09-03T13:18:30"
+ },
+ {
+  "id": "V1b-TC-table",
+  "description": "cached production table vs benchmarks",
+  "verdict": "PASS",
+  "details": "max|dCp| 0.0003",
+  "timestamp": "2026-09-03T13:18:30"
+ },
+ {
+  "id": "V1c-nu",
+  "description": "Prandtl-Meyer angle nu(M) vs published anchors",
+  "verdict": "PASS",
+  "details": "max dev 0.005 deg",
+  "timestamp": "2026-09-03T13:18:31"
+ },
+ {
+  "id": "V1c-closed-form",
+  "description": "Cp(0)=0, monotone in theta, vacuum clamp beyond nu(M)",
+  "verdict": "FAIL",
+  "details": "",
+  "timestamp": "2026-09-03T13:18:31"
+ },
+ {
+  "id": "V1c-table",
+  "description": "cached PM table vs closed form",
+  "verdict": "FAIL",
+  "details": "max|dCp| 7.18e-03",
+  "timestamp": "2026-09-03T13:18:31"
+ },
+ {
+  "id": "V1b-TC-M3",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=3)",
+  "verdict": "PASS",
+  "details": "max|dCp| core=0.0457, full=0.3162 (theta<=70)",
+  "timestamp": "2026-09-03T13:20:09"
+ },
+ {
+  "id": "V1b-TC-M5",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=5)",
+  "verdict": "PASS",
+  "details": "max|dCp| core=0.0605, full=0.2855 (theta<=70)",
+  "timestamp": "2026-09-03T13:20:09"
+ },
+ {
+  "id": "V1b-TC-M10",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=10)",
+  "verdict": "PASS",
+  "details": "max|dCp| core=0.0462, full=0.2343 (theta<=70)",
+  "timestamp": "2026-09-03T13:20:09"
+ },
+ {
+  "id": "V1b-TC-benchmarks",
+  "description": "direct TM solver vs analytic benchmarks",
+  "verdict": "PASS",
+  "details": "max|dCp| 0.0003",
+  "timestamp": "2026-09-03T13:20:11"
+ },
+ {
+  "id": "V1b-TC-table",
+  "description": "cached production table vs benchmarks",
+  "verdict": "PASS",
+  "details": "max|dCp| 0.0003",
+  "timestamp": "2026-09-03T13:20:11"
+ },
+ {
+  "id": "V1c-nu",
+  "description": "Prandtl-Meyer angle nu(M) vs published anchors",
+  "verdict": "PASS",
+  "details": "max dev 0.005 deg",
+  "timestamp": "2026-09-03T13:20:12"
+ },
+ {
+  "id": "V1c-closed-form",
+  "description": "Cp(0)=0, monotone in theta, vacuum clamp beyond nu(M)",
+  "verdict": "PASS",
+  "details": "",
+  "timestamp": "2026-09-03T13:20:12"
+ },
+ {
+  "id": "V1c-table",
+  "description": "cached PM table vs closed form (smooth region)",
+  "verdict": "FAIL",
+  "details": "max|dCp| 7.15e-03",
+  "timestamp": "2026-09-03T13:20:12"
+ },
+ {
+  "id": "V1c-table-bend",
+  "description": "PM table near the vacuum asymptote (within 3 deg of nu)",
+  "verdict": "PASS",
+  "details": "max|dCp| 7.18e-03 (2-deg grid)",
+  "timestamp": "2026-09-03T13:20:12"
+ },
+ {
+  "id": "V2-CD-M3",
+  "description": "Apollo CD vs digitized D&M LIM (M=3)",
+  "verdict": "FAIL",
+  "details": "max|d|=0.2393 at alpha_DM=-0.0 deg",
+  "timestamp": "2026-09-03T13:20:14"
+ },
+ {
+  "id": "V2-CL-M3",
+  "description": "Apollo CL vs digitized D&M LIM (M=3)",
+  "verdict": "FAIL",
+  "details": "max|d|=0.0801 at alpha_DM=-30.0 deg",
+  "timestamp": "2026-09-03T13:20:14"
+ },
+ {
+  "id": "V2-Cm-M3",
+  "description": "Apollo Cm vs digitized D&M LIM (M=3)",
+  "verdict": "FAIL",
+  "details": "max|d|=0.1092 at alpha_DM=0.0 deg",
+  "timestamp": "2026-09-03T13:20:14"
+ },
+ {
+  "id": "V2-L/D-M3",
+  "description": "Apollo L/D vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0220 at alpha_DM=-30.0 deg",
+  "timestamp": "2026-09-03T13:20:14"
+ },
+ {
+  "id": "V2-CD-M10",
+  "description": "Apollo CD vs digitized D&M LIM (M=10)",
+  "verdict": "FAIL",
+  "details": "max|d|=0.0959 at alpha_DM=-4.9 deg",
+  "timestamp": "2026-09-03T13:20:15"
+ },
+ {
+  "id": "V2-CL-M10",
+  "description": "Apollo CL vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0229 at alpha_DM=-27.6 deg",
+  "timestamp": "2026-09-03T13:20:15"
+ },
+ {
+  "id": "V2-Cm-M10",
+  "description": "Apollo Cm vs digitized D&M LIM (M=10)",
+  "verdict": "FAIL",
+  "details": "max|d|=0.1170 at alpha_DM=-0.2 deg",
+  "timestamp": "2026-09-03T13:20:15"
+ },
+ {
+  "id": "V2-L/D-M10",
+  "description": "Apollo L/D vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0089 at alpha_DM=-10.0 deg",
+  "timestamp": "2026-09-03T13:20:15"
+ },
+ {
+  "id": "V2-CD-overprediction",
+  "description": "M=10 CD(alpha~0) exceeds wind tunnel (method behaviour)",
+  "verdict": "PASS",
+  "details": "ours 1.610 vs WT 1.509 (D&M LIM digitized 1.704)",
+  "timestamp": "2026-09-03T13:20:15"
+ },
+ {
+  "id": "V2-CD-M3",
+  "description": "Apollo CD vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0070, fitted scale k=1.160, abs max|d|=0.239",
+  "timestamp": "2026-09-03T13:34:37"
+ },
+ {
+  "id": "V2-CL-M3",
+  "description": "Apollo CL vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0031, fitted scale k=1.186, abs max|d|=0.080",
+  "timestamp": "2026-09-03T13:34:37"
+ },
+ {
+  "id": "V2-Cm-M3",
+  "description": "Apollo Cm vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0018, fitted scale k=1.177, abs max|d|=0.009",
+  "timestamp": "2026-09-03T13:34:37"
+ },
+ {
+  "id": "V2-L/D-M3",
+  "description": "Apollo L/D vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0220 (absolute)",
+  "timestamp": "2026-09-03T13:34:37"
+ },
+ {
+  "id": "V2-CD-M10",
+  "description": "Apollo CD vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0148, fitted scale k=0.946, abs max|d|=0.096",
+  "timestamp": "2026-09-03T13:34:37"
+ },
+ {
+  "id": "V2-CL-M10",
+  "description": "Apollo CL vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0059, fitted scale k=0.959, abs max|d|=0.023",
+  "timestamp": "2026-09-03T13:34:38"
+ },
+ {
+  "id": "V2-Cm-M10",
+  "description": "Apollo Cm vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0014, fitted scale k=0.912, abs max|d|=0.005",
+  "timestamp": "2026-09-03T13:34:38"
+ },
+ {
+  "id": "V2-L/D-M10",
+  "description": "Apollo L/D vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0089 (absolute)",
+  "timestamp": "2026-09-03T13:34:38"
+ },
+ {
+  "id": "V2-CD-overprediction",
+  "description": "M=10 CD(alpha~0) exceeds wind tunnel (method behaviour)",
+  "verdict": "PASS",
+  "details": "ours 1.610 vs WT 1.509 (D&M LIM digitized 1.704)",
+  "timestamp": "2026-09-03T13:34:38"
+ },
+ {
+  "id": "V1c-nu",
+  "description": "Prandtl-Meyer angle nu(M) vs published anchors",
+  "verdict": "PASS",
+  "details": "max dev 0.005 deg",
+  "timestamp": "2026-09-03T13:35:29"
+ },
+ {
+  "id": "V1c-closed-form",
+  "description": "Cp(0)=0, monotone in theta, vacuum clamp beyond nu(M)",
+  "verdict": "PASS",
+  "details": "",
+  "timestamp": "2026-09-03T13:35:29"
+ },
+ {
+  "id": "V1c-table",
+  "description": "cached PM table vs closed form (smooth region)",
+  "verdict": "PASS",
+  "details": "max|dCp| 7.15e-03 (2-deg theta x 1-Mach grid)",
+  "timestamp": "2026-09-03T13:35:29"
+ },
+ {
+  "id": "V1c-table-bend",
+  "description": "PM table near the vacuum asymptote (within 3 deg of nu)",
+  "verdict": "PASS",
+  "details": "max|dCp| 7.18e-03 (2-deg grid)",
+  "timestamp": "2026-09-03T13:35:29"
+ },
+ {
+  "id": "V4a-algorithm",
+  "description": "trim_alpha() reproduces the database column",
+  "verdict": "PASS",
+  "details": "max dev 0.0000 deg",
+  "timestamp": "2026-09-04T05:27:53"
+ },
+ {
+  "id": "V4a-trim-vs-DM",
+  "description": "trim alpha(M) vs digitized D&M LIM (Fig 7.17a)",
+  "verdict": "PASS",
+  "details": "max 0.33 deg at M=6",
+  "timestamp": "2026-09-04T05:27:53"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 58.51 vs 53.06 (10.3%, band 8%)",
+  "timestamp": "2026-09-04T05:35:01"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 1328.44 vs 1430.20 (7.1%, band 2%)",
+  "timestamp": "2026-09-04T05:35:01"
+ },
+ {
+  "id": "V4c-peak-heat-rate",
+  "description": "peak stagnation heat rate vs digitized Fig 7.17 max",
+  "verdict": "FAIL",
+  "details": "ours 0.759 vs 0.616 MW m^-2 (23.1%, band 10%)",
+  "timestamp": "2026-09-04T05:35:01"
+ },
+ {
+  "id": "V4c-peak-load-factor",
+  "description": "peak load factor vs digitized Fig 7.17 max",
+  "verdict": "FAIL",
+  "details": "ours 9.54 vs 4.36 g (band 0.25 g)",
+  "timestamp": "2026-09-04T05:35:01"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 2.98 at time=187.2, band 1.5",
+  "timestamp": "2026-09-04T05:36:36"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 0.0226 at Mach=3.8, band 0.02",
+  "timestamp": "2026-09-04T05:36:36"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 153 at Mach=27.2, band 6",
+  "timestamp": "2026-09-04T05:36:36"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 8.05 at Mach=17.9, band 0.25",
+  "timestamp": "2026-09-04T05:36:36"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 7.42e+05 at Mach=20.1, band 4.32e+04",
+  "timestamp": "2026-09-04T05:36:36"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 59.89 vs 53.06 (12.9%, band 8%)",
+  "timestamp": "2026-09-05T19:07:45"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 1363.81 vs 1430.20 (4.6%, band 2%)",
+  "timestamp": "2026-09-05T19:07:45"
+ },
+ {
+  "id": "V4c-peak-heat-rate",
+  "description": "peak stagnation heat rate vs digitized Fig 7.17 max",
+  "verdict": "FAIL",
+  "details": "ours 0.739 vs 0.616 MW m^-2 (19.9%, band 10%)",
+  "timestamp": "2026-09-05T19:07:45"
+ },
+ {
+  "id": "V4c-peak-load-factor",
+  "description": "peak load factor vs digitized Fig 7.17 max",
+  "verdict": "FAIL",
+  "details": "ours 8.94 vs 4.36 g (band 0.25 g)",
+  "timestamp": "2026-09-05T19:07:45"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.68 at time=198.4, band 1.5",
+  "timestamp": "2026-09-05T19:08:37"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 0.0226 at Mach=3.8, band 0.02",
+  "timestamp": "2026-09-05T19:08:38"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 89.6 at Mach=27.3, band 6",
+  "timestamp": "2026-09-05T19:08:38"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 7.59 at Mach=17.9, band 0.25",
+  "timestamp": "2026-09-05T19:08:38"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 7.21e+05 at Mach=20.1, band 4.32e+04",
+  "timestamp": "2026-09-05T19:08:38"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 65.90 vs 53.06 (24.2%, band 8%)",
+  "timestamp": "2026-09-05T19:10:59"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 1525.23 vs 1430.20 (6.6%, band 2%)",
+  "timestamp": "2026-09-05T19:10:59"
+ },
+ {
+  "id": "V4c-peak-heat-rate",
+  "description": "peak stagnation heat rate vs digitized Fig 7.17 max",
+  "verdict": "PASS",
+  "details": "ours 0.658 vs 0.616 MW m^-2 (6.8%, band 10%)",
+  "timestamp": "2026-09-05T19:10:59"
+ },
+ {
+  "id": "V4c-peak-load-factor",
+  "description": "peak load factor vs digitized Fig 7.17 max",
+  "verdict": "FAIL",
+  "details": "ours 6.52 vs 4.36 g (band 0.25 g)",
+  "timestamp": "2026-09-05T19:10:59"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 4.75 at time=179.5, band 1.5",
+  "timestamp": "2026-09-05T19:11:09"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 0.0226 at Mach=3.8, band 0.02",
+  "timestamp": "2026-09-05T19:11:09"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 79.6 at Mach=24.5, band 6",
+  "timestamp": "2026-09-05T19:11:09"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 5.74 at Mach=17.9, band 0.25",
+  "timestamp": "2026-09-05T19:11:09"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 6.34e+05 at Mach=20.1, band 4.32e+04",
+  "timestamp": "2026-09-05T19:11:09"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 61.23 vs 53.06 (15.4%, band 8%)",
+  "timestamp": "2026-09-05T19:18:04"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "PASS",
+  "details": "ours 1405.78 vs 1430.20 (1.7%, band 2%)",
+  "timestamp": "2026-09-05T19:18:04"
+ },
+ {
+  "id": "V4c-peak-heat-rate",
+  "description": "peak stagnation heat rate vs digitized Fig 7.17 max",
+  "verdict": "FAIL",
+  "details": "ours 0.726 vs 0.616 MW m^-2 (17.7%, band 10%)",
+  "timestamp": "2026-09-05T19:18:04"
+ },
+ {
+  "id": "V4c-peak-load-factor",
+  "description": "peak load factor vs digitized Fig 7.17 max",
+  "verdict": "FAIL",
+  "details": "ours 8.13 vs 4.36 g (band 0.25 g)",
+  "timestamp": "2026-09-05T19:18:04"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "PASS",
+  "details": "max err 1.15 at time=242.0, band 1.5",
+  "timestamp": "2026-09-05T19:18:14"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 0.0226 at Mach=3.8, band 0.02",
+  "timestamp": "2026-09-05T19:18:14"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 85.2 at Mach=27.3, band 6",
+  "timestamp": "2026-09-05T19:18:14"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 7.14 at Mach=17.9, band 0.25",
+  "timestamp": "2026-09-05T19:18:14"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 7.06e+05 at Mach=20.1, band 4.32e+04",
+  "timestamp": "2026-09-05T19:18:14"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 65.90 vs 53.06 (24.2%, band 8%)",
+  "timestamp": "2026-09-05T19:19:54"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 1525.23 vs 1430.20 (6.6%, band 2%)",
+  "timestamp": "2026-09-05T19:19:55"
+ },
+ {
+  "id": "V4c-peak-heat-rate",
+  "description": "peak stagnation heat rate vs digitized Fig 7.17 max",
+  "verdict": "PASS",
+  "details": "ours 0.658 vs 0.616 MW m^-2 (6.8%, band 10%)",
+  "timestamp": "2026-09-05T19:19:55"
+ },
+ {
+  "id": "V4c-peak-load-factor",
+  "description": "peak load factor vs digitized Fig 7.17 max",
+  "verdict": "FAIL",
+  "details": "ours 6.52 vs 4.36 g (band 0.25 g)",
+  "timestamp": "2026-09-05T19:19:55"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 4.75 at time=179.5, band 1.5",
+  "timestamp": "2026-09-05T19:20:05"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 0.0226 at Mach=3.8, band 0.02",
+  "timestamp": "2026-09-05T19:20:05"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 79.6 at Mach=24.5, band 6",
+  "timestamp": "2026-09-05T19:20:05"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 5.74 at Mach=17.9, band 0.25",
+  "timestamp": "2026-09-05T19:20:05"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 6.34e+05 at Mach=20.1, band 4.32e+04",
+  "timestamp": "2026-09-05T19:20:05"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 70.12 vs 53.06 (32.1%, band 8%)",
+  "timestamp": "2026-09-05T19:26:27"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 1657.07 vs 1430.20 (15.9%, band 2%)",
+  "timestamp": "2026-09-05T19:26:27"
+ },
+ {
+  "id": "V4c-peak-heat-rate",
+  "description": "peak stagnation heat rate vs digitized Fig 7.17 max",
+  "verdict": "PASS",
+  "details": "ours 0.621 vs 0.616 MW m^-2 (0.7%, band 10%)",
+  "timestamp": "2026-09-05T19:26:27"
+ },
+ {
+  "id": "V4c-peak-load-factor",
+  "description": "peak load factor vs digitized Fig 7.17 max",
+  "verdict": "FAIL",
+  "details": "ours 5.06 vs 4.36 g (band 0.25 g)",
+  "timestamp": "2026-09-05T19:26:27"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 8.35 at time=179.5, band 1.5",
+  "timestamp": "2026-09-05T19:26:39"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 0.0226 at Mach=3.8, band 0.02",
+  "timestamp": "2026-09-05T19:26:39"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 79.6 at Mach=24.5, band 6",
+  "timestamp": "2026-09-05T19:26:39"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 4.71 at Mach=17.9, band 0.25",
+  "timestamp": "2026-09-05T19:26:39"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 6.09e+05 at Mach=21.6, band 4.32e+04",
+  "timestamp": "2026-09-05T19:26:39"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 61.24 vs 53.06 (15.4%, band 8%)",
+  "timestamp": "2026-09-05T19:27:35"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "PASS",
+  "details": "ours 1405.84 vs 1430.20 (1.7%, band 2%)",
+  "timestamp": "2026-09-05T19:27:35"
+ },
+ {
+  "id": "V4c-peak-heat-rate",
+  "description": "peak stagnation heat rate vs digitized Fig 7.17 max",
+  "verdict": "FAIL",
+  "details": "ours 0.726 vs 0.616 MW m^-2 (17.8%, band 10%)",
+  "timestamp": "2026-09-05T19:27:35"
+ },
+ {
+  "id": "V4c-peak-load-factor",
+  "description": "peak load factor vs digitized Fig 7.17 max",
+  "verdict": "FAIL",
+  "details": "ours 8.13 vs 4.36 g (band 0.25 g)",
+  "timestamp": "2026-09-05T19:27:35"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "PASS",
+  "details": "max err 1.12 at time=242.0, band 1.5",
+  "timestamp": "2026-09-05T19:27:47"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 0.0226 at Mach=3.8, band 0.02",
+  "timestamp": "2026-09-05T19:27:47"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 85.2 at Mach=27.3, band 6",
+  "timestamp": "2026-09-05T19:27:47"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 7.13 at Mach=17.9, band 0.25",
+  "timestamp": "2026-09-05T19:27:47"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 7.1e+05 at Mach=21.6, band 4.32e+04",
+  "timestamp": "2026-09-05T19:27:47"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 70.12 vs 53.06 (32.1%, band 8%)",
+  "timestamp": "2026-09-05T19:31:46"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 1657.07 vs 1430.20 (15.9%, band 2%)",
+  "timestamp": "2026-09-05T19:31:46"
+ },
+ {
+  "id": "V4c-peak-heat-rate",
+  "description": "peak stagnation heat rate vs digitized Fig 7.17 max",
+  "verdict": "PASS",
+  "details": "ours 0.621 vs 0.616 MW m^-2 (0.7%, band 10%)",
+  "timestamp": "2026-09-05T19:31:46"
+ },
+ {
+  "id": "V4c-peak-load-factor",
+  "description": "peak load factor vs digitized Fig 7.17 max",
+  "verdict": "FAIL",
+  "details": "ours 5.06 vs 4.36 g (band 0.25 g)",
+  "timestamp": "2026-09-05T19:31:46"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 8.35 at time=179.5, band 1.5",
+  "timestamp": "2026-09-05T19:31:58"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 0.0226 at Mach=3.8, band 0.02",
+  "timestamp": "2026-09-05T19:31:58"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 79.6 at Mach=24.5, band 6",
+  "timestamp": "2026-09-05T19:31:58"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 4.71 at Mach=17.9, band 0.25",
+  "timestamp": "2026-09-05T19:31:58"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 6.09e+05 at Mach=21.6, band 4.32e+04",
+  "timestamp": "2026-09-05T19:31:58"
+ }
+]

@@ -25,7 +25,7 @@ ZS_Table = {           # Rs/Rm: Rm/Reff at each Rm/Rn
 ZS_Rs_over_Rm_keys = np.array(sorted(ZS_Table.keys()))
 
 
-def effective_nose_radius(Rn, Rs, Rm=config.Rm_fixed):
+def effective_nose_radius(Rn, Rs, Rm=None):
     """Effective nose radius "Reff" from the Zoby & Sullivan chart.
 
     Parameters
@@ -38,6 +38,8 @@ def effective_nose_radius(Rn, Rs, Rm=config.Rm_fixed):
     float
         Effective nose radius "Reff" [m] (falls back to "Rn" if undefined).
     """
+    if Rm is None:
+        Rm = config.Rm_fixed
     if Rm <= 0 or Rn <= 0 or Rs < 0:
         raise ValueError("Rn, Rs and Rm must be non-negative")
     if Rm > Rn:
@@ -59,7 +61,7 @@ def effective_nose_radius(Rn, Rs, Rm=config.Rm_fixed):
     return Reff
 
 
-def stagnation_heat_flux(rho, V, Rn, Rs=None, Rm=config.Rm_fixed, Tw_by_Taw=0, use_effective_rn=True):
+def stagnation_heat_flux(rho, V, Rn, Rs=None, Rm=None, Tw_by_Taw=0, use_effective_rn=True):
     """Stagnation-point convective heat flux.
 
     Parameters
@@ -84,6 +86,8 @@ def stagnation_heat_flux(rho, V, Rn, Rs=None, Rm=config.Rm_fixed, Tw_by_Taw=0, u
     float
         Stagnation heat flux "q_stag" [W m^-2].
     """
+    if Rm is None:
+        Rm = config.Rm_fixed
     if rho < 0:
         raise ValueError("Density must be non-negative.")
     if V < 0:
@@ -104,12 +108,14 @@ def stagnation_heat_flux(rho, V, Rn, Rs=None, Rm=config.Rm_fixed, Tw_by_Taw=0, u
     return q_stag
 
 
-def shoulder_heat_flux(q_stag, M, AoA_deg, theta_sp_rad, Rs, Rm=config.Rm_fixed):
+def shoulder_heat_flux(q_stag, M, AoA_deg, theta_sp_rad, Rs, Rm=None):
     """Shoulder heat flux as a correlated fraction of the stagnation value.
 
     Uses an empirical linear correlation in Mach, AoA, "Rs/Rm" and the
     nose-sphere half-angle "theta_sp_rad".
     """
+    if Rm is None:
+        Rm = config.Rm_fixed
     c1, c2, c3, c4, c5 = -0.0006, 0.0185, -0.5321, -0.2939, 1.3630
 
     rs_over_rm = Rs / Rm
