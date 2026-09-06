@@ -33,6 +33,8 @@ SECTIONS = ("cd vs alpha", "cl vs alpha", "cm vs alpha", "l/d vs alpha",
 
 RE_MACH_LABEL = re.compile(r"^M\s*=\s*([0-9.]+)\s*\((.*)\)\s*$", re.I)
 RE_MACH_CP = re.compile(r"^M\s*=\s*(infinte|infinite|[0-9.]+)\s*:\s*$", re.I)
+RE_ARRAY_ANY = re.compile(
+    r"^(?P<name>[A-Za-z][\w ./]*)\s*(?P<unit>\([^)]*\))?\s*=\s*(?P<arr>\[.*\])\s*$")
 RE_ARRAY = re.compile(
     r"^(?P<name>M|alpha|L/D|bank_angle|Qcs|n|t|h|theta|cp|Rm\s*/\s*Rn|Rm/Reff)"
     r"\s*(?P<unit>\([^)]*\))?\s*=\s*(?P<arr>\[.*\])\s*$", re.I)
@@ -126,14 +128,30 @@ def main():
             if m:
                 mach, src = float(m.group(1)), source_of(m.group(2))
                 i += 1
-                while i < n and not lines[i].strip():   # blanks after label
-                    i += 1
-                if i < n and "alpha" in lines[i].lower():
-                    i += 1                        # consume 'alpha, Cd' header
+                # two export styles: legacy 'alpha, Cd' header + pair rows,
+                # or PlotDigitizer arrays 'alpha/x = [...]' + 'CD/Cl/Cm/y = [...]'
+                pend_alpha, pend_vals = None, None
                 while i < n:
                     t = lines[i].strip()
-                    if not t or RE_MACH_LABEL.match(t) or is_section(t):
+                    if RE_MACH_LABEL.match(t) or is_section(t):
                         break
+                    am = RE_ARRAY_ANY.match(t)
+                    if am:
+                        key = re.sub(r"\s+", "", am.group("name").lower())
+                        arr = parse_array(am.group("arr"))
+                        if key.startswith("alpha") or key == "x":
+                            pend_alpha = arr
+                        else:
+                            pend_vals = arr
+                        if pend_alpha and pend_vals:
+                            for a, v in zip(pend_alpha, pend_vals):
+                                aero_rows.append((coeff, mach, src, a, v))
+                            pend_alpha = pend_vals = None
+                        i += 1
+                        continue
+                    if not t and not (pend_alpha or pend_vals):
+                        i += 1
+                        continue
                     vals = split_row(t)
                     if len(vals) == 2:
                         aero_rows.append((coeff, mach, src, vals[0], vals[1]))

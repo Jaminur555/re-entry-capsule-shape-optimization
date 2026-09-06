@@ -151,3 +151,29 @@
 | V4b-bank_angle_deg | bank_angle_deg vs digitized D&M LIM (Fig 7.17) | FAIL | max err 79.6 at Mach=24.5, band 6 |
 | V4b-load_factor_g | load_factor_g vs digitized D&M LIM (Fig 7.17) | FAIL | max err 4.71 at Mach=17.9, band 0.25 |
 | V4b-heat_rate_w_m2 | heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17) | FAIL | max err 6.09e+05 at Mach=21.6, band 4.32e+04 |
+| V2-CD-M3 | Apollo CD vs digitized D&M LIM (M=3) | FAIL | shape max|d|=0.0525, fitted scale k=1.110, abs max|d|=0.212 |
+| V2-CL-M3 | Apollo CL vs digitized D&M LIM (M=3) | PASS | shape max|d|=0.0080, fitted scale k=1.183, abs max|d|=0.087 |
+| V2-Cm-M3 | Apollo Cm vs digitized D&M LIM (M=3) | PASS | shape max|d|=0.0017, fitted scale k=1.190, abs max|d|=0.009 |
+| V2-L/D-M3 | Apollo L/D vs digitized D&M LIM (M=3) | PASS | max|d|=0.0289 (absolute) |
+| V2-CD-M10 | Apollo CD vs digitized D&M LIM (M=10) | PASS | shape max|d|=0.0139, fitted scale k=0.947, abs max|d|=0.099 |
+| V2-CL-M10 | Apollo CL vs digitized D&M LIM (M=10) | PASS | shape max|d|=0.0072, fitted scale k=0.948, abs max|d|=0.028 |
+| V2-Cm-M10 | Apollo Cm vs digitized D&M LIM (M=10) | FAIL | shape max|d|=0.0550, fitted scale k=-1.010, abs max|d|=0.056 |
+| V2-L/D-M10 | Apollo L/D vs digitized D&M LIM (M=10) | PASS | max|d|=0.0069 (absolute) |
+| V2-CD-overprediction | M=10 CD(alpha~0) exceeds wind tunnel (method behaviour) | PASS | ours 1.610 vs WT 1.523 (D&M LIM digitized 1.704) |
+| V2-CD-M3 | Apollo CD vs digitized D&M LIM (M=3) | FAIL | shape max|d|=0.0607, fitted scale k=1.109, abs max|d|=0.226 |
+| V2-CL-M3 | Apollo CL vs digitized D&M LIM (M=3) | PASS | shape max|d|=0.0080, fitted scale k=1.183, abs max|d|=0.087 |
+| V2-Cm-M3 | Apollo Cm vs digitized D&M LIM (M=3) | PASS | shape max|d|=0.0017, fitted scale k=1.190, abs max|d|=0.009 |
+| V2-L/D-M3 | Apollo L/D vs digitized D&M LIM (M=3) | PASS | max|d|=0.0289 (absolute) |
+| V2-CD-M10 | Apollo CD vs digitized D&M LIM (M=10) | PASS | shape max|d|=0.0139, fitted scale k=0.947, abs max|d|=0.099 |
+| V2-CL-M10 | Apollo CL vs digitized D&M LIM (M=10) | PASS | shape max|d|=0.0072, fitted scale k=0.948, abs max|d|=0.028 |
+| V2-Cm-M10 | Apollo Cm vs digitized D&M LIM (M=10) | PASS | shape max|d|=0.0006, fitted scale k=0.952, abs max|d|=0.003 |
+| V2-L/D-M10 | Apollo L/D vs digitized D&M LIM (M=10) | PASS | max|d|=0.0069 (absolute) |
+| V2-CD-overprediction | M=10 CD(alpha~0) exceeds wind tunnel (method behaviour) | PASS | ours 1.610 vs WT 1.523 (D&M LIM digitized 1.704) |
+| V4c-Stagnation-point heat load | end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM) | FAIL | ours 70.12 vs 53.06 (32.1%, band 8%) |
+| V4c-Ground track length | end-to-end Ground track length vs D&M Table 7.1 (LIM) | FAIL | ours 1657.07 vs 1430.20 (15.9%, band 2%) |
+| V4c-Stagnation-point heat load | end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM) | FAIL | ours 70.12 vs 53.06 (32.1%, band 8%) |
+| V4c-Ground track length | end-to-end Ground track length vs D&M Table 7.1 (LIM) | FAIL | ours 1657.07 vs 1430.20 (15.9%, band 2%) |
+| V4c-Stagnation-point heat load | end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM) | FAIL | ours 70.12 vs 53.06 (32.1%, band 8%) |
+| V4c-Ground track length | end-to-end Ground track length vs D&M Table 7.1 (LIM) | FAIL | ours 1657.07 vs 1430.20 (15.9%, band 2%) |
+| V4c-peak-heat-rate | peak stagnation heat rate vs digitized Fig 7.17 max | PASS | ours 0.621 vs 0.616 MW m^-2 (0.7%, band 10%) |
+| V4c-peak-load-factor | peak load factor vs digitized Fig 7.17 max (D&M Eq 6.13 total-force) | FAIL | ours n_tot 5.33 (D-only 5.06) vs 4.36 g (band 0.25 g) |

@@ -1041,5 +1041,187 @@
   "verdict": "FAIL",
   "details": "max err 6.09e+05 at Mach=21.6, band 4.32e+04",
   "timestamp": "2026-09-05T19:31:58"
+ },
+ {
+  "id": "V2-CD-M3",
+  "description": "Apollo CD vs digitized D&M LIM (M=3)",
+  "verdict": "FAIL",
+  "details": "shape max|d|=0.0525, fitted scale k=1.110, abs max|d|=0.212",
+  "timestamp": "2026-09-07T00:22:55"
+ },
+ {
+  "id": "V2-CL-M3",
+  "description": "Apollo CL vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0080, fitted scale k=1.183, abs max|d|=0.087",
+  "timestamp": "2026-09-07T00:22:55"
+ },
+ {
+  "id": "V2-Cm-M3",
+  "description": "Apollo Cm vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0017, fitted scale k=1.190, abs max|d|=0.009",
+  "timestamp": "2026-09-07T00:22:55"
+ },
+ {
+  "id": "V2-L/D-M3",
+  "description": "Apollo L/D vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0289 (absolute)",
+  "timestamp": "2026-09-07T00:22:55"
+ },
+ {
+  "id": "V2-CD-M10",
+  "description": "Apollo CD vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0139, fitted scale k=0.947, abs max|d|=0.099",
+  "timestamp": "2026-09-07T00:22:55"
+ },
+ {
+  "id": "V2-CL-M10",
+  "description": "Apollo CL vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0072, fitted scale k=0.948, abs max|d|=0.028",
+  "timestamp": "2026-09-07T00:22:55"
+ },
+ {
+  "id": "V2-Cm-M10",
+  "description": "Apollo Cm vs digitized D&M LIM (M=10)",
+  "verdict": "FAIL",
+  "details": "shape max|d|=0.0550, fitted scale k=-1.010, abs max|d|=0.056",
+  "timestamp": "2026-09-07T00:22:55"
+ },
+ {
+  "id": "V2-L/D-M10",
+  "description": "Apollo L/D vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0069 (absolute)",
+  "timestamp": "2026-09-07T00:22:55"
+ },
+ {
+  "id": "V2-CD-overprediction",
+  "description": "M=10 CD(alpha~0) exceeds wind tunnel (method behaviour)",
+  "verdict": "PASS",
+  "details": "ours 1.610 vs WT 1.523 (D&M LIM digitized 1.704)",
+  "timestamp": "2026-09-07T00:22:55"
+ },
+ {
+  "id": "V2-CD-M3",
+  "description": "Apollo CD vs digitized D&M LIM (M=3)",
+  "verdict": "FAIL",
+  "details": "shape max|d|=0.0607, fitted scale k=1.109, abs max|d|=0.226",
+  "timestamp": "2026-09-07T01:14:28"
+ },
+ {
+  "id": "V2-CL-M3",
+  "description": "Apollo CL vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0080, fitted scale k=1.183, abs max|d|=0.087",
+  "timestamp": "2026-09-07T01:14:28"
+ },
+ {
+  "id": "V2-Cm-M3",
+  "description": "Apollo Cm vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0017, fitted scale k=1.190, abs max|d|=0.009",
+  "timestamp": "2026-09-07T01:14:28"
+ },
+ {
+  "id": "V2-L/D-M3",
+  "description": "Apollo L/D vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0289 (absolute)",
+  "timestamp": "2026-09-07T01:14:28"
+ },
+ {
+  "id": "V2-CD-M10",
+  "description": "Apollo CD vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0139, fitted scale k=0.947, abs max|d|=0.099",
+  "timestamp": "2026-09-07T01:14:29"
+ },
+ {
+  "id": "V2-CL-M10",
+  "description": "Apollo CL vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0072, fitted scale k=0.948, abs max|d|=0.028",
+  "timestamp": "2026-09-07T01:14:29"
+ },
+ {
+  "id": "V2-Cm-M10",
+  "description": "Apollo Cm vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0006, fitted scale k=0.952, abs max|d|=0.003",
+  "timestamp": "2026-09-07T01:14:29"
+ },
+ {
+  "id": "V2-L/D-M10",
+  "description": "Apollo L/D vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0069 (absolute)",
+  "timestamp": "2026-09-07T01:14:29"
+ },
+ {
+  "id": "V2-CD-overprediction",
+  "description": "M=10 CD(alpha~0) exceeds wind tunnel (method behaviour)",
+  "verdict": "PASS",
+  "details": "ours 1.610 vs WT 1.523 (D&M LIM digitized 1.704)",
+  "timestamp": "2026-09-07T01:14:29"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 70.12 vs 53.06 (32.1%, band 8%)",
+  "timestamp": "2026-09-07T01:30:39"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 1657.07 vs 1430.20 (15.9%, band 2%)",
+  "timestamp": "2026-09-07T01:30:39"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 70.12 vs 53.06 (32.1%, band 8%)",
+  "timestamp": "2026-09-07T01:31:03"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 1657.07 vs 1430.20 (15.9%, band 2%)",
+  "timestamp": "2026-09-07T01:31:03"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 70.12 vs 53.06 (32.1%, band 8%)",
+  "timestamp": "2026-09-07T01:31:20"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 1657.07 vs 1430.20 (15.9%, band 2%)",
+  "timestamp": "2026-09-07T01:31:20"
+ },
+ {
+  "id": "V4c-peak-heat-rate",
+  "description": "peak stagnation heat rate vs digitized Fig 7.17 max",
+  "verdict": "PASS",
+  "details": "ours 0.621 vs 0.616 MW m^-2 (0.7%, band 10%)",
+  "timestamp": "2026-09-07T01:31:20"
+ },
+ {
+  "id": "V4c-peak-load-factor",
+  "description": "peak load factor vs digitized Fig 7.17 max (D&M Eq 6.13 total-force)",
+  "verdict": "FAIL",
+  "details": "ours n_tot 5.33 (D-only 5.06) vs 4.36 g (band 0.25 g)",
+  "timestamp": "2026-09-07T01:31:20"
  }
 ]
