@@ -10,11 +10,8 @@ from ..trim import trim_alpha
 
 
 def build_aero_database(rn, rs, r_theta, cg_params=(0.5, 0.7)):
-    """Build the Mach x AoA aerodynamic coefficient database for a capsule.
-
-    Evaluates the modified-Newtonian solver over the configured Mach/AoA grid,
-    builds "RegularGridInterpolator" objects for CD, CL and Cm, and computes
-    the trim AoA at each Mach node.
+    """Mach x AoA coefficient database: CD/CL/Cm interpolators over the
+    configured grid plus the trim AoA at each Mach node.
 
     Parameters
     ----------
@@ -27,7 +24,7 @@ def build_aero_database(rn, rs, r_theta, cg_params=(0.5, 0.7)):
     -------
     tuple
         "(interp_CD, interp_CL, interp_CM, alpha_trim_arr)" -- three
-        interpolators and the array of trim AoA per Mach node [deg].
+        interpolators and the trim AoA per Mach node [deg].
     """
     props_local = get_capsule_properties(rn, rs, r_theta, cg_params=cg_params)
     solver_local = HypersonicAeroSolver()

@@ -31,15 +31,12 @@ def clean_cone_table(table, gamma=config.gamma):
     """Post-process the raw cone table to be NaN-free and monotone in theta.
 
     (1) Remove low-theta spikes among the attached cells (spurious
-        strong-shock-branch roots near the Mach angle): walking right-to-left,
-        no attached cell may exceed the next attached cell to its right.
-    (2) Fill detached cells (NaN) with the LARGER of the modified-Newtonian
-        fallback (Dirkx's detached-shock treatment) and the last attached
-        cone Cp. Taking the max keeps Cp from DROPPING when the shock
-        detaches -- a plain Newtonian fill sits below the last attached
-        value at high theta (e.g. M=10: fill ~1.30 vs attached 1.465 at
-        55 deg), which used to drag valid cells down via the monotone
-        enforcement and biased the afterbody Cp low.
+        strong-shock-branch roots near the Mach angle) by enforcing
+        right-to-left monotonicity.
+    (2) Fill detached cells (NaN) with max(modified-Newtonian fallback,
+        last attached cone Cp) so Cp does not DROP when the shock detaches
+        (Dirkx's detached-shock treatment; a plain Newtonian fill sits
+        below the last attached value at high theta).
     """
     cleaned = np.array(table, dtype=float)
     n = CONE_THETAS.size
@@ -69,12 +66,9 @@ def clean_cone_table(table, gamma=config.gamma):
 
 
 def load_cone_table():
-    """Load the cached cone table; build + save it on first use (one-time, ~3-6 min).
+    """Load the cached cone table; build + save it on first use (~3-6 min).
 
-    The cache is a human-readable CSV (rows = Mach, columns = theta-deg, with
-    header labels) so it can be inspected or edited in any spreadsheet. Mach and
-    theta grids still come from config; only the Cp grid is stored. Resolved
-    against the PARENT package dir (capsule_opt/) so a single copy is reused."""
+    The cache is a human-readable labeled CSV; grids come from config."""
 
     path = config.CONE_CACHE
 

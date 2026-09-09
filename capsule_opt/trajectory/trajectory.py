@@ -10,21 +10,20 @@ from ..atmosphere import atmosphere, mach_from_velocity
 def bank_angle_sigma(m, L_force, V, h, gamma, lat, chi):
     """Bank angle 'sigma' enforcing the no-skip condition gamma_dot <= 0.
 
-    Follows Dirkx & Mooij (2017) Eq. (2.41): cos(sigma) = (m/L) * [(g - V^2/r)
-    * cos(gamma) - 2*omega*V*cos(lat)*sin(chi)].  Per their Sect. 2.3.1 the
-    modulation is only active while cos(sigma) lies in (0, 1) (lift dominant);
-    outside that regime the bank is set to 0 deg (full lift up), never past
-    90 deg.
+    Dirkx & Mooij (2017) Eq. (2.41); per their Sect. 2.3.1 the modulation is
+    active only while 0 < cos(sigma) < 1, else full lift up (sigma = 0),
+    never banked past 90 deg.
 
     Parameters
     ----------
     m : float
         Vehicle mass [kg].
     L_force : float
-        Aerodynamic lift force magnitude [N].
-    V, h, gamma, lat, chi : float
-        Speed [m s^-1], altitude [m], flight-path angle, latitude and heading
-        angle [rad].
+        Lift force magnitude [N].
+    V, h : float
+        Speed [m s^-1], altitude [m].
+    gamma, lat, chi : float
+        Flight-path angle, latitude and heading [rad].
 
     Returns
     -------
@@ -36,8 +35,6 @@ def bank_angle_sigma(m, L_force, V, h, gamma, lat, chi):
     Vc2   = g * r
     cos_s = (m / max(L_force, 1e-6)) * (g * (1 - V ** 2 / Vc2) * np.cos(gamma) -
                                  2 * config.omega_earth * V * np.cos(lat) * np.sin(chi))
-    # Eq. (2.41) active only while 0 < cos(sigma) < 1 (lift dominant, bank
-    # left); otherwise full lift up (sigma = 0), never banked past 90 deg.
     return float(np.arccos(cos_s)) if 0.0 < cos_s < 1.0 else 0.0
 
 

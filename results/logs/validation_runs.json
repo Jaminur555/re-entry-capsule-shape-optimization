@@ -1223,5 +1223,915 @@
   "verdict": "FAIL",
   "details": "ours n_tot 5.33 (D-only 5.06) vs 4.36 g (band 0.25 g)",
   "timestamp": "2026-09-07T01:31:20"
+ },
+ {
+  "id": "V2-CD-M3",
+  "description": "Apollo CD vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0607, fitted scale k=1.109, abs max|d|=0.226",
+  "timestamp": "2026-09-07T18:45:34"
+ },
+ {
+  "id": "V2-CL-M3",
+  "description": "Apollo CL vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0080, fitted scale k=1.183, abs max|d|=0.087",
+  "timestamp": "2026-09-07T18:45:34"
+ },
+ {
+  "id": "V2-Cm-M3",
+  "description": "Apollo Cm vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0017, fitted scale k=1.190, abs max|d|=0.009",
+  "timestamp": "2026-09-07T18:45:34"
+ },
+ {
+  "id": "V2-L/D-M3",
+  "description": "Apollo L/D vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0289 (absolute)",
+  "timestamp": "2026-09-07T18:45:34"
+ },
+ {
+  "id": "V2-CD-M10",
+  "description": "Apollo CD vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0139, fitted scale k=0.947, abs max|d|=0.099",
+  "timestamp": "2026-09-07T18:45:35"
+ },
+ {
+  "id": "V2-CL-M10",
+  "description": "Apollo CL vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0072, fitted scale k=0.948, abs max|d|=0.028",
+  "timestamp": "2026-09-07T18:45:35"
+ },
+ {
+  "id": "V2-Cm-M10",
+  "description": "Apollo Cm vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0006, fitted scale k=0.952, abs max|d|=0.003",
+  "timestamp": "2026-09-07T18:45:35"
+ },
+ {
+  "id": "V2-L/D-M10",
+  "description": "Apollo L/D vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0069 (absolute)",
+  "timestamp": "2026-09-07T18:45:35"
+ },
+ {
+  "id": "V2-CD-overprediction",
+  "description": "M=10 CD(alpha~0) exceeds wind tunnel (method behaviour)",
+  "verdict": "PASS",
+  "details": "ours 1.610 vs WT 1.523 (D&M LIM digitized 1.704)",
+  "timestamp": "2026-09-07T18:45:35"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 8.35 at time=179.5, band 1.5",
+  "timestamp": "2026-09-08T18:56:29"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 0.0226 at Mach=3.8, band 0.02",
+  "timestamp": "2026-09-08T18:56:29"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 8.35 at time=179.5, band 1.5",
+  "timestamp": "2026-09-08T18:57:46"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 0.0226 at Mach=3.8, band 0.02",
+  "timestamp": "2026-09-08T18:57:46"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 78.9 at Mach=24.7, band 6",
+  "timestamp": "2026-09-08T18:57:46"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 4.73 at Mach=18.0, band 0.25",
+  "timestamp": "2026-09-08T18:57:46"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 6.09e+05 at Mach=21.6, band 4.32e+04",
+  "timestamp": "2026-09-08T18:57:46"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 70.12 vs 53.06 (32.1%, band 8%)",
+  "timestamp": "2026-09-08T19:00:49"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 1657.07 vs 1430.20 (15.9%, band 2%)",
+  "timestamp": "2026-09-08T19:00:49"
+ },
+ {
+  "id": "V4c-peak-heat-rate",
+  "description": "peak stagnation heat rate vs digitized Fig 7.17 max",
+  "verdict": "PASS",
+  "details": "ours 0.621 vs 0.616 MW m^-2 (0.7%, band 10%)",
+  "timestamp": "2026-09-08T19:00:49"
+ },
+ {
+  "id": "V4c-peak-load-factor",
+  "description": "peak load factor vs digitized Fig 7.17 max (D&M Eq 6.13 total-force)",
+  "verdict": "FAIL",
+  "details": "ours n_tot 5.33 (D-only 5.06) vs 4.35 g (band 0.25 g)",
+  "timestamp": "2026-09-08T19:00:49"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 8.35 at time=179.5, band 1.5",
+  "timestamp": "2026-09-08T19:40:34"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 0.0226 at Mach=3.8, band 0.02",
+  "timestamp": "2026-09-08T19:40:34"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 78.9 at Mach=24.7, band 6",
+  "timestamp": "2026-09-08T19:40:34"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.65 at Mach=21.8, band 0.25",
+  "timestamp": "2026-09-08T19:40:34"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.56e+05 at Mach=25.8, band 4.32e+04",
+  "timestamp": "2026-09-08T19:40:34"
+ },
+ {
+  "id": "V1a-MN-M3",
+  "description": "Modified Newtonian Cp vs Fig 3.5 (M=3)",
+  "verdict": "PASS",
+  "details": "max|dCp|=0.0083 at theta=29.7 deg",
+  "timestamp": "2026-09-09T04:05:45"
+ },
+ {
+  "id": "V1a-MN-M5",
+  "description": "Modified Newtonian Cp vs Fig 3.5 (M=5)",
+  "verdict": "PASS",
+  "details": "max|dCp|=0.0257 at theta=66.3 deg",
+  "timestamp": "2026-09-09T04:05:45"
+ },
+ {
+  "id": "V1a-MN-M10",
+  "description": "Modified Newtonian Cp vs Fig 3.5 (M=10)",
+  "verdict": "PASS",
+  "details": "max|dCp|=0.0151 at theta=14.2 deg",
+  "timestamp": "2026-09-09T04:05:45"
+ },
+ {
+  "id": "V1a-MN-Minf",
+  "description": "Modified Newtonian Cp vs Fig 3.5 (M=inf)",
+  "verdict": "PASS",
+  "details": "max|dCp|=0.0261 at theta=58.0 deg",
+  "timestamp": "2026-09-09T04:05:45"
+ },
+ {
+  "id": "V1b-TC-M3",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=3)",
+  "verdict": "PASS",
+  "details": "max|dCp| core=0.0457, full=0.3162 (theta<=70)",
+  "timestamp": "2026-09-09T04:05:54"
+ },
+ {
+  "id": "V1b-TC-M5",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=5)",
+  "verdict": "PASS",
+  "details": "max|dCp| core=0.0605, full=0.2855 (theta<=70)",
+  "timestamp": "2026-09-09T04:05:54"
+ },
+ {
+  "id": "V1b-TC-M10",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=10)",
+  "verdict": "PASS",
+  "details": "max|dCp| core=0.0462, full=0.2343 (theta<=70)",
+  "timestamp": "2026-09-09T04:05:54"
+ },
+ {
+  "id": "V1b-TC-benchmarks",
+  "description": "direct TM solver vs analytic benchmarks",
+  "verdict": "PASS",
+  "details": "max|dCp| 0.0003",
+  "timestamp": "2026-09-09T04:05:57"
+ },
+ {
+  "id": "V1b-TC-table",
+  "description": "cached production table vs benchmarks",
+  "verdict": "PASS",
+  "details": "max|dCp| 0.0003",
+  "timestamp": "2026-09-09T04:05:57"
+ },
+ {
+  "id": "V2-CD-M3",
+  "description": "Apollo CD vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0607, fitted scale k=1.109, abs max|d|=0.226",
+  "timestamp": "2026-09-09T04:06:04"
+ },
+ {
+  "id": "V2-CL-M3",
+  "description": "Apollo CL vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0080, fitted scale k=1.183, abs max|d|=0.087",
+  "timestamp": "2026-09-09T04:06:04"
+ },
+ {
+  "id": "V2-Cm-M3",
+  "description": "Apollo Cm vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0017, fitted scale k=1.190, abs max|d|=0.009",
+  "timestamp": "2026-09-09T04:06:04"
+ },
+ {
+  "id": "V2-L/D-M3",
+  "description": "Apollo L/D vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0289 (absolute)",
+  "timestamp": "2026-09-09T04:06:04"
+ },
+ {
+  "id": "V2-CD-M10",
+  "description": "Apollo CD vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0139, fitted scale k=0.947, abs max|d|=0.099",
+  "timestamp": "2026-09-09T04:06:05"
+ },
+ {
+  "id": "V2-CL-M10",
+  "description": "Apollo CL vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0072, fitted scale k=0.948, abs max|d|=0.028",
+  "timestamp": "2026-09-09T04:06:05"
+ },
+ {
+  "id": "V2-Cm-M10",
+  "description": "Apollo Cm vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0006, fitted scale k=0.952, abs max|d|=0.003",
+  "timestamp": "2026-09-09T04:06:05"
+ },
+ {
+  "id": "V2-L/D-M10",
+  "description": "Apollo L/D vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0069 (absolute)",
+  "timestamp": "2026-09-09T04:06:05"
+ },
+ {
+  "id": "V2-CD-overprediction",
+  "description": "M=10 CD(alpha~0) exceeds wind tunnel (method behaviour)",
+  "verdict": "PASS",
+  "details": "ours 1.610 vs WT 1.523 (D&M LIM digitized 1.704)",
+  "timestamp": "2026-09-09T04:06:05"
+ },
+ {
+  "id": "V3a-ZS-rs00",
+  "description": "Zoby-Sullivan Rs/Rm=0.00, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0086",
+  "timestamp": "2026-09-09T04:06:14"
+ },
+ {
+  "id": "V3a-ZS-rs10",
+  "description": "Zoby-Sullivan Rs/Rm=0.10, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0123",
+  "timestamp": "2026-09-09T04:06:14"
+ },
+ {
+  "id": "V3a-ZS-rs20",
+  "description": "Zoby-Sullivan Rs/Rm=0.20, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0136",
+  "timestamp": "2026-09-09T04:06:14"
+ },
+ {
+  "id": "V3a-ZS-rs25",
+  "description": "Zoby-Sullivan Rs/Rm=0.25, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0143",
+  "timestamp": "2026-09-09T04:06:14"
+ },
+ {
+  "id": "V3a-ZS-rs30",
+  "description": "Zoby-Sullivan Rs/Rm=0.30, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0117",
+  "timestamp": "2026-09-09T04:06:14"
+ },
+ {
+  "id": "V3a-ZS-all",
+  "description": "Zoby-Sullivan chart, all curves, design space",
+  "verdict": "PASS",
+  "details": "worst |d(Rm/Reff)|=0.0143",
+  "timestamp": "2026-09-09T04:06:14"
+ },
+ {
+  "id": "V3a-ZS-edge",
+  "description": "chart edge Rm/Rn>0.7 (informational, outside design space)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0261 near x=0.98: coarse-grid artifact of the in-code table's last 0.9->1.0 segment; the true curve curls to ~1.01. Unused in production (Rm/Rn <= 0.67).",
+  "timestamp": "2026-09-09T04:06:14"
+ },
+ {
+  "id": "V4a-algorithm",
+  "description": "trim_alpha() reproduces the database column",
+  "verdict": "PASS",
+  "details": "max dev 0.0000 deg",
+  "timestamp": "2026-09-09T04:06:33"
+ },
+ {
+  "id": "V4a-trim-vs-DM",
+  "description": "trim alpha(M) vs digitized D&M LIM (Fig 7.17a)",
+  "verdict": "PASS",
+  "details": "max 0.33 deg at M=6",
+  "timestamp": "2026-09-09T04:06:33"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 8.35 at t=179.5, band 1.5",
+  "timestamp": "2026-09-09T04:06:59"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 0.0226 at Mach=3.8, band 0.02",
+  "timestamp": "2026-09-09T04:06:59"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 78.9 at Mach=24.7, band 6",
+  "timestamp": "2026-09-09T04:06:59"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.65 at Mach=21.8, band 0.25",
+  "timestamp": "2026-09-09T04:06:59"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.56e+05 at Mach=25.8, band 4.32e+04",
+  "timestamp": "2026-09-09T04:06:59"
+ },
+ {
+  "id": "V1a-MN-M3",
+  "description": "Modified Newtonian Cp vs Fig 3.5 (M=3)",
+  "verdict": "PASS",
+  "details": "max|dCp|=0.0083 at theta=29.7 deg",
+  "timestamp": "2026-09-09T04:16:05"
+ },
+ {
+  "id": "V1a-MN-M5",
+  "description": "Modified Newtonian Cp vs Fig 3.5 (M=5)",
+  "verdict": "PASS",
+  "details": "max|dCp|=0.0257 at theta=66.3 deg",
+  "timestamp": "2026-09-09T04:16:05"
+ },
+ {
+  "id": "V1a-MN-M10",
+  "description": "Modified Newtonian Cp vs Fig 3.5 (M=10)",
+  "verdict": "PASS",
+  "details": "max|dCp|=0.0151 at theta=14.2 deg",
+  "timestamp": "2026-09-09T04:16:05"
+ },
+ {
+  "id": "V1a-MN-Minf",
+  "description": "Modified Newtonian Cp vs Fig 3.5 (M=inf)",
+  "verdict": "PASS",
+  "details": "max|dCp|=0.0261 at theta=58.0 deg",
+  "timestamp": "2026-09-09T04:16:05"
+ },
+ {
+  "id": "V1b-TC-M3",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=3)",
+  "verdict": "PASS",
+  "details": "max|dCp| core=0.0457, full=0.3162 (theta<=70)",
+  "timestamp": "2026-09-09T04:16:14"
+ },
+ {
+  "id": "V1b-TC-M5",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=5)",
+  "verdict": "PASS",
+  "details": "max|dCp| core=0.0605, full=0.2855 (theta<=70)",
+  "timestamp": "2026-09-09T04:16:14"
+ },
+ {
+  "id": "V1b-TC-M10",
+  "description": "exact Taylor-Maccoll vs digitized correlation (M=10)",
+  "verdict": "PASS",
+  "details": "max|dCp| core=0.0462, full=0.2343 (theta<=70)",
+  "timestamp": "2026-09-09T04:16:14"
+ },
+ {
+  "id": "V1b-TC-benchmarks",
+  "description": "direct TM solver vs analytic benchmarks",
+  "verdict": "PASS",
+  "details": "max|dCp| 0.0003",
+  "timestamp": "2026-09-09T04:16:18"
+ },
+ {
+  "id": "V1b-TC-table",
+  "description": "cached production table vs benchmarks",
+  "verdict": "PASS",
+  "details": "max|dCp| 0.0003",
+  "timestamp": "2026-09-09T04:16:18"
+ },
+ {
+  "id": "V2-CD-M3",
+  "description": "Apollo CD vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0607, fitted scale k=1.109, abs max|d|=0.226",
+  "timestamp": "2026-09-09T04:16:28"
+ },
+ {
+  "id": "V2-CL-M3",
+  "description": "Apollo CL vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0080, fitted scale k=1.183, abs max|d|=0.087",
+  "timestamp": "2026-09-09T04:16:28"
+ },
+ {
+  "id": "V2-Cm-M3",
+  "description": "Apollo Cm vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0017, fitted scale k=1.190, abs max|d|=0.009",
+  "timestamp": "2026-09-09T04:16:28"
+ },
+ {
+  "id": "V2-L/D-M3",
+  "description": "Apollo L/D vs digitized D&M LIM (M=3)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0289 (absolute)",
+  "timestamp": "2026-09-09T04:16:28"
+ },
+ {
+  "id": "V2-CD-M10",
+  "description": "Apollo CD vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0139, fitted scale k=0.947, abs max|d|=0.099",
+  "timestamp": "2026-09-09T04:16:31"
+ },
+ {
+  "id": "V2-CL-M10",
+  "description": "Apollo CL vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0072, fitted scale k=0.948, abs max|d|=0.028",
+  "timestamp": "2026-09-09T04:16:31"
+ },
+ {
+  "id": "V2-Cm-M10",
+  "description": "Apollo Cm vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "shape max|d|=0.0006, fitted scale k=0.952, abs max|d|=0.003",
+  "timestamp": "2026-09-09T04:16:31"
+ },
+ {
+  "id": "V2-L/D-M10",
+  "description": "Apollo L/D vs digitized D&M LIM (M=10)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0069 (absolute)",
+  "timestamp": "2026-09-09T04:16:31"
+ },
+ {
+  "id": "V2-CD-overprediction",
+  "description": "M=10 CD(alpha~0) exceeds wind tunnel (method behaviour)",
+  "verdict": "PASS",
+  "details": "ours 1.610 vs WT 1.523 (D&M LIM digitized 1.704)",
+  "timestamp": "2026-09-09T04:16:33"
+ },
+ {
+  "id": "V3a-ZS-rs00",
+  "description": "Zoby-Sullivan Rs/Rm=0.00, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0086",
+  "timestamp": "2026-09-09T04:16:39"
+ },
+ {
+  "id": "V3a-ZS-rs10",
+  "description": "Zoby-Sullivan Rs/Rm=0.10, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0123",
+  "timestamp": "2026-09-09T04:16:39"
+ },
+ {
+  "id": "V3a-ZS-rs20",
+  "description": "Zoby-Sullivan Rs/Rm=0.20, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0136",
+  "timestamp": "2026-09-09T04:16:39"
+ },
+ {
+  "id": "V3a-ZS-rs25",
+  "description": "Zoby-Sullivan Rs/Rm=0.25, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0143",
+  "timestamp": "2026-09-09T04:16:40"
+ },
+ {
+  "id": "V3a-ZS-rs30",
+  "description": "Zoby-Sullivan Rs/Rm=0.30, design-space region (Rm/Rn<=0.7)",
+  "verdict": "PASS",
+  "details": "max|d(Rm/Reff)|=0.0117",
+  "timestamp": "2026-09-09T04:16:40"
+ },
+ {
+  "id": "V3a-ZS-all",
+  "description": "Zoby-Sullivan chart, all curves, design space",
+  "verdict": "PASS",
+  "details": "worst |d(Rm/Reff)|=0.0143",
+  "timestamp": "2026-09-09T04:16:40"
+ },
+ {
+  "id": "V3a-ZS-edge",
+  "description": "chart edge Rm/Rn>0.7 (informational, outside design space)",
+  "verdict": "PASS",
+  "details": "max|d|=0.0261 near x=0.98: coarse-grid artifact of the in-code table's last 0.9->1.0 segment; the true curve curls to ~1.01. Unused in production (Rm/Rn <= 0.67).",
+  "timestamp": "2026-09-09T04:16:40"
+ },
+ {
+  "id": "V4a-algorithm",
+  "description": "trim_alpha() reproduces the database column",
+  "verdict": "PASS",
+  "details": "max dev 0.0000 deg",
+  "timestamp": "2026-09-09T04:16:58"
+ },
+ {
+  "id": "V4a-trim-vs-DM",
+  "description": "trim alpha(M) vs digitized D&M LIM (Fig 7.17a)",
+  "verdict": "PASS",
+  "details": "max 0.33 deg at M=6",
+  "timestamp": "2026-09-09T04:16:58"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 8.35 at t=179.5, band 1.5",
+  "timestamp": "2026-09-09T04:17:28"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 0.0226 at Mach=3.8, band 0.02",
+  "timestamp": "2026-09-09T04:17:28"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 78.9 at Mach=24.7, band 6",
+  "timestamp": "2026-09-09T04:17:28"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.65 at Mach=21.8, band 0.25",
+  "timestamp": "2026-09-09T04:17:28"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.56e+05 at Mach=25.8, band 4.32e+04",
+  "timestamp": "2026-09-09T04:17:28"
+ },
+ {
+  "id": "V4a-algorithm",
+  "description": "trim_alpha() reproduces the database column",
+  "verdict": "PASS",
+  "details": "max dev 0.0000 deg",
+  "timestamp": "2026-09-09T16:17:36"
+ },
+ {
+  "id": "V4a-trim-vs-DM",
+  "description": "trim alpha(M) vs digitized D&M LIM (Fig 7.17a)",
+  "verdict": "PASS",
+  "details": "max 0.25 deg at M=4",
+  "timestamp": "2026-09-09T16:17:36"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 8.16 at t=198.6, band 1.5",
+  "timestamp": "2026-09-09T16:17:52"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "PASS",
+  "details": "max err 0.0172 at Mach=3.2, band 0.02",
+  "timestamp": "2026-09-09T16:17:52"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 80.5 at Mach=24.1, band 6",
+  "timestamp": "2026-09-09T16:17:52"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.24 at Mach=23.1, band 0.25",
+  "timestamp": "2026-09-09T16:17:52"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 6.07e+05 at Mach=21.9, band 4.32e+04",
+  "timestamp": "2026-09-09T16:17:52"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 70.12 vs 53.06 (32.1%, band 8%)",
+  "timestamp": "2026-09-09T16:18:05"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 1657.07 vs 1430.20 (15.9%, band 2%)",
+  "timestamp": "2026-09-09T16:18:05"
+ },
+ {
+  "id": "V4c-peak-heat-rate",
+  "description": "peak stagnation heat rate vs digitized Fig 7.17 max",
+  "verdict": "PASS",
+  "details": "ours 0.621 vs 0.617 MW m^-2 (0.7%, band 10%)",
+  "timestamp": "2026-09-09T16:18:05"
+ },
+ {
+  "id": "V4c-peak-load-factor",
+  "description": "peak load factor vs digitized Fig 7.17 max (D&M Eq 6.13 total-force)",
+  "verdict": "FAIL",
+  "details": "ours n_tot 5.33 (D-only 5.06) vs 4.36 g (band 0.25 g)",
+  "timestamp": "2026-09-09T16:18:05"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 8.16 at t=198.6, band 1.5",
+  "timestamp": "2026-09-09T16:20:07"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "PASS",
+  "details": "max err 0.0172 at Mach=3.2, band 0.02",
+  "timestamp": "2026-09-09T16:20:07"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 80.5 at Mach=24.1, band 6",
+  "timestamp": "2026-09-09T16:20:07"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.24 at Mach=23.1, band 0.25",
+  "timestamp": "2026-09-09T16:20:07"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 6.07e+05 at Mach=21.9, band 4.32e+04",
+  "timestamp": "2026-09-09T16:20:07"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 70.12 vs 53.06 (32.1%, band 8%)",
+  "timestamp": "2026-09-09T16:20:19"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 1657.07 vs 1430.20 (15.9%, band 2%)",
+  "timestamp": "2026-09-09T16:20:19"
+ },
+ {
+  "id": "V4c-peak-heat-rate",
+  "description": "peak stagnation heat rate vs digitized Fig 7.17 max",
+  "verdict": "PASS",
+  "details": "ours 0.621 vs 0.617 MW m^-2 (0.7%, band 10%)",
+  "timestamp": "2026-09-09T16:20:19"
+ },
+ {
+  "id": "V4c-peak-load-factor",
+  "description": "peak load factor vs digitized Fig 7.17 max (D&M Eq 6.13 total-force)",
+  "verdict": "FAIL",
+  "details": "ours n_tot 5.33 (D-only 5.06) vs 4.36 g (band 0.25 g)",
+  "timestamp": "2026-09-09T16:20:19"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 8.16 at t=198.6, band 1.5",
+  "timestamp": "2026-09-09T16:23:06"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "PASS",
+  "details": "max err 0.0172 at Mach=3.2, band 0.02",
+  "timestamp": "2026-09-09T16:23:06"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 80.5 at Mach=24.1, band 6",
+  "timestamp": "2026-09-09T16:23:06"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.24 at Mach=23.1, band 0.25",
+  "timestamp": "2026-09-09T16:23:06"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 3.68e+05 at Mach=22.9, band 4.32e+04",
+  "timestamp": "2026-09-09T16:23:06"
+ },
+ {
+  "id": "V4c-Stagnation-point heat load",
+  "description": "end-to-end Stagnation-point heat load vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 70.12 vs 53.06 (32.1%, band 8%)",
+  "timestamp": "2026-09-09T16:23:19"
+ },
+ {
+  "id": "V4c-Ground track length",
+  "description": "end-to-end Ground track length vs D&M Table 7.1 (LIM)",
+  "verdict": "FAIL",
+  "details": "ours 1657.07 vs 1430.20 (15.9%, band 2%)",
+  "timestamp": "2026-09-09T16:23:19"
+ },
+ {
+  "id": "V4c-peak-heat-rate",
+  "description": "peak stagnation heat rate vs digitized Fig 7.17 max",
+  "verdict": "PASS",
+  "details": "ours 0.621 vs 0.617 MW m^-2 (0.7%, band 10%)",
+  "timestamp": "2026-09-09T16:23:19"
+ },
+ {
+  "id": "V4c-peak-load-factor",
+  "description": "peak load factor vs digitized Fig 7.17 max (D&M Eq 6.13 total-force)",
+  "verdict": "FAIL",
+  "details": "ours n_tot 5.33 (D-only 5.06) vs 4.36 g (band 0.25 g)",
+  "timestamp": "2026-09-09T16:23:19"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 8.16 at t=198.6, band 1.5",
+  "timestamp": "2026-09-09T16:28:33"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "PASS",
+  "details": "max err 0.0172 at Mach=3.2, band 0.02",
+  "timestamp": "2026-09-09T16:28:33"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 79.6 at Mach=24.8, band 6",
+  "timestamp": "2026-09-09T16:28:33"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.24 at Mach=23.1, band 0.25",
+  "timestamp": "2026-09-09T16:28:33"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.43e+05 at Mach=27.8, band 4.32e+04",
+  "timestamp": "2026-09-09T16:28:33"
+ },
+ {
+  "id": "V4b-altitude_km",
+  "description": "altitude_km vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 8.16 at t=198.6, band 1.5",
+  "timestamp": "2026-09-09T16:37:36"
+ },
+ {
+  "id": "V4b-lift_to_drag",
+  "description": "lift_to_drag vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "PASS",
+  "details": "max err 0.0172 at Mach=3.2, band 0.02",
+  "timestamp": "2026-09-09T16:37:36"
+ },
+ {
+  "id": "V4b-bank_angle_deg",
+  "description": "bank_angle_deg vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 79.6 at Mach=24.8, band 6",
+  "timestamp": "2026-09-09T16:37:36"
+ },
+ {
+  "id": "V4b-load_factor_g",
+  "description": "load_factor_g vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.24 at Mach=23.1, band 0.25",
+  "timestamp": "2026-09-09T16:37:36"
+ },
+ {
+  "id": "V4b-heat_rate_w_m2",
+  "description": "heat_rate_w_m2 vs digitized D&M LIM (Fig 7.17)",
+  "verdict": "FAIL",
+  "details": "max err 1.43e+05 at Mach=27.8, band 4.32e+04",
+  "timestamp": "2026-09-09T16:37:36"
+ },
+ {
+  "id": "V4a-algorithm",
+  "description": "trim_alpha() reproduces the database column",
+  "verdict": "PASS",
+  "details": "max dev 0.0000 deg",
+  "timestamp": "2026-09-09T16:44:30"
+ },
+ {
+  "id": "V4a-trim-vs-DM",
+  "description": "trim alpha(M) vs digitized D&M LIM (Fig 7.17a)",
+  "verdict": "PASS",
+  "details": "max 0.25 deg at M=4",
+  "timestamp": "2026-09-09T16:44:30"
  }
 ]

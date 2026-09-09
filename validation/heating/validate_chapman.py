@@ -30,6 +30,7 @@ def main():
                            ["rs_over_rm", "rm_over_rn", "rm_over_reff"])
     keys = sorted(set(np.round(d["rs_over_rm"], 6)))
 
+    utils.set_paper_style()
     fig, ax = plt.subplots(figsize=(7, 5))
     worst_all, worst_edge = 0.0, 0.0
     ok_all = True
@@ -67,15 +68,11 @@ def main():
                  f"curls to ~1.01. Unused in production (Rm/Rn <= 0.67).")
 
     ax.plot([], [], "o", ms=3, color="gray", label="digitized (independent)")
-    ax.set_xlabel("Rm/Rn")
-    ax.set_ylabel("Rm/Reff")
-    ax.set_title("V3a - Zoby & Sullivan (1965) effective nose radius")
+    ax.set_xlabel("$R_m/R_n$")
+    ax.set_ylabel("$R_m/R_{eff}$")
+    ax.set_title("Effective nose radius, Zoby & Sullivan (Fig. 3.9)")
     ax.legend(fontsize=8)
-    ax.grid(alpha=0.3)
-    fig.tight_layout()
-    out = utils.FIGURES_DIR / "v3a_zoby_sullivan.png"
-    fig.savefig(out, dpi=150)
-    print(f"  figure -> {out}")
+    utils.save_fig(fig, "v3a_zoby_sullivan.png")
 
 
 if __name__ == "__main__":

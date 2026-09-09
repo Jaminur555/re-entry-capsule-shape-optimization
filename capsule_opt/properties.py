@@ -10,19 +10,19 @@ PART_NOSE = 0   # blunt forebody (nose sphere + shoulder) -> Modified Newtonian
 PART_AFTERBODY = 1 # low-inclination afterbody (cone + rear) -> tangent-cone/Newtonian
 
 def get_capsule_properties(rn, rs, r_theta, cg_params=(0.5, 0.7)):
-    """Compute the capsule geometric properties and center-of-gravity model.
+    """Capsule geometric properties and CG model for normalized parameters.
     Parameters
     ----------
     rn, rs, r_theta : float
         Normalized design parameters in [0, 1].
     cg_params : tuple of float, optional
-        Normalized "(dx, dz)" offsets placing the CG relative to the volume
-        centroid (axial offset over length, radial offset over local height).
+        Normalized (dx, dz) CG offsets: axial over total length, radial over
+        local height.
     Returns
     -------
     dict
-        Lengths, reference area, surface normals, panel discretization,
-        volume, surface area, center of gravity and nose-sphere half-angle.
+        Geometry, panels, normals, volume, surface area, CG, nose-sphere
+        half-angle "theta_sp1".
     """
     Lc = config.Lc_fixed
     Rn, Rs, theta_c = cap_params(rn, rs, r_theta)
@@ -66,9 +66,8 @@ def get_capsule_properties(rn, rs, r_theta, cg_params=(0.5, 0.7)):
     Z_mid = 0.5 * (Y[:-1] + Y[1:])
 
    #=========== local-inclination part tag =========
-   # nose spher + shoulder = blunt forebody; cone + rear sphere = afterbody.
 
-    panel_part = np.where(np.arange(X_mid.size) < breaks['cone_start'], 
+    panel_part = np.where(np.arange(X_mid.size) < breaks['cone_start'],
                         PART_NOSE, PART_AFTERBODY)
  
    # ========== outwards unit normal ================

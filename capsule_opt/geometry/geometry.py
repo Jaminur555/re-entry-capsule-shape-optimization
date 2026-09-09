@@ -79,8 +79,7 @@ def capsule_profile(rn, rs, r_theta):
     Y = np.concatenate([Y_ns, Y_t, Y_c, Y_rs])
     
     # node-index boundaries between the four meridional segments
-    # (used by the local-inclination method to tag each panel as
-    #  blunt-nose vs low-inclination afterbody, per Dirkx & Mooij)
+    # (used by the local-inclination method to tag nose vs afterbody panels)
     breaks = {
         "toroid_start": len(X_ns),                      # end of nose sphere
         "cone_start"  : len(X_ns) + len(X_t),           # end of torid sphere

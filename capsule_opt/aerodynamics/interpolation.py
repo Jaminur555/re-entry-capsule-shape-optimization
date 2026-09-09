@@ -22,11 +22,9 @@ def interp_cp(table, machs, thetas_deg, M, theta_deg):
 
 
 # ===========================================================================
-# Local-inclination law databases (Dirkx & Mooij Sec 3.3.2, 7.3.1)
-#   windward nose/shoulder (blunt)  -> modified Newtonian   (analytic)
-#   windward afterbody (round)      -> tangent cone (low-hyp) blended to
-#                                      modified Newtonian (high-hyp)
-#   leeward / lee (theta < 0)       -> Prandtl-Meyer        (analytic/table)
+# Local-inclination law databases (Dirkx & Mooij Sec 3.3.2, 7.3.1):
+#   windward blunt (nose/shoulder) -> modified Newtonian; windward afterbody
+#   -> tangent-cone blended to Newtonian (high-hyp); lee -> Prandtl-Meyer.
 # Only the cone law is expensive, so it alone is tabulated and cached.
 # ===========================================================================
 

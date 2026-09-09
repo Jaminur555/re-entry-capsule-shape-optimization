@@ -93,10 +93,8 @@ def cp_tangent_cone(M, theta_deg, gamma=config.gamma):
             return None
 
     Mn1, delta, V2 = shock_post(M, beta, gamma)
-    # Final high-resolution surface integration. tm_integrate returns None if the
-    # RK4 hits the sonic singularity before reaching the surface -- a marginal /
-    # near-detached root. Treat that as "no attached solution" (contract: None),
-    # matching the other None-returning paths instead of crashing on unpack.
+    # Final surface pass: None = RK4 hit the sonic singularity before the
+    # surface (marginal/near-detached root) -> "no attached solution".
     surf = tm_integrate(V2 * np.cos(beta - delta),
                         -V2 * np.sin(beta - delta),
                         beta, thc, gamma, n=300)

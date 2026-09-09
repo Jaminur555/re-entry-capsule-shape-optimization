@@ -73,11 +73,9 @@ class HypersonicAeroSolver:
 
         Ca, Cn, Cm = Ca / A_ref, Cn / A_ref, Cm / (A_ref * L_ref)
 
-        # Body -> wind axes.the body x-axis points downstream (nose at the origin,
-        # freestream Vinf = +x), so Ca is the downstream (drag-direction) axial force.
-        # The lift perpendicular is therefore (sin a, -cos a): CL = Ca sin a - Cn cos a
-        # -> positive L/D at positive AoA (verified ~0.30 at the trim AoA ~20 deg, matching Apollo).
-        #  Drag is the Vinf projection as usual. 
+        # Body -> wind axes: the body x-axis points downstream (nose at the
+        # origin, Vinf = +x), so lift is (sin a, -cos a): CL = Ca sin a - Cn cos a,
+        # giving positive L/D at positive AoA. Drag is the Vinf projection.
         CD = Ca * np.cos(alpha) + Cn * np.sin(alpha)
         CL = Ca * np.sin(alpha) - Cn * np.cos(alpha)
 

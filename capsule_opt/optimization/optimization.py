@@ -7,18 +7,10 @@ from .objectives import evaluate_shape
 
 
 class CapsuleOptimization(ElementwiseProblem):
-    """NSGA-II elementwise problem: optimize capsule shape over 3 design params.
-
-    Variables (normalized in [0, 1]): "rn" (nose radius), "rs" (shoulder
-    radius) and "r_theta" (afterbody cone half-angle).
-
-    Objectives (3): maximize volumetric efficiency "eta_V", minimize heat
-    load "Qs" and maximize ground-track range "sg". Maximization targets
-    are negated and objectives are scaled to a comparable ~0.1-10 range.
-
-    Inequality constraints (5, "g(x) <= 0" feasible): peak stagnation heat
-    flux, peak shoulder heat flux, load factor, pitch stability and
-    trim-on-nose margin.
+    """NSGA-II elementwise problem over 3 normalized design vars ("rn", "rs",
+    "r_theta"): 3 objectives (max "eta_V", min "Qs", max "sg"; maximization
+    negated, all scaled to ~0.1-10) and 5 inequality constraints (g <= 0):
+    stagnation/shoulder heat flux, load factor, pitch stability, trim-on-nose.
 
     Parameters
     ----------
@@ -31,11 +23,8 @@ class CapsuleOptimization(ElementwiseProblem):
         Forwarded to :class:'pymoo.core.problem.ElementwiseProblem' (e.g. an
         "elementwise_runner" for multiprocessing).
 
-    Notes
-    -----
-    "__getstate__"/"__setstate__" drop the (unpicklable)
-    "elementwise_runner" so the problem can be sent to "multiprocessing"
-    pool workers.
+    "__getstate__"/"__setstate__" drop the (unpicklable) "elementwise_runner"
+    for multiprocessing pool workers.
     """
 
     def __init__(self, m=None, cg_params=(0.5, 0.7), **kwargs):
@@ -43,8 +32,8 @@ class CapsuleOptimization(ElementwiseProblem):
             n_var=3,                                  # rn, rs, r_theta
             n_obj=3,                                  # eta_V, Qs, sg
             n_ieq_constr=5,                           # q_stag, q_shldr, n_max, pitch, nose
-            xl=np.array([0.0, 0.0, 0.0]),             # lower bound (avoid exact 0)
-            xu=np.array([1.0, 1.0, 1.0]),             # upper bound (avoid exact 1)
+            xl=np.array([0.0, 0.0, 0.0]),             # lower bounds
+            xu=np.array([1.0, 1.0, 1.0]),             # upper bounds
             **kwargs
         )
         self.m = m

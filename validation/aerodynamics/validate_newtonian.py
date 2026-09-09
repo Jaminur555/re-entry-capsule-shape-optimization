@@ -32,6 +32,7 @@ def main():
     data = curves()
     order = sorted(data, key=lambda s: np.inf if s == "inf" else float(s))
 
+    utils.set_paper_style()
     fig, axes = plt.subplots(2, 2, figsize=(9, 7), sharex=True, sharey=True)
     for ax, key in zip(axes.ravel(), order):
         M = 1.0e4 if key == "inf" else float(key)
@@ -43,20 +44,16 @@ def main():
                      ok, f"max|dCp|={err.max():.4f} at theta={th[np.argmax(err)]:.1f} deg")
 
         thf = np.linspace(0, 90, 181)
-        ax.plot(thf, [cp_newtonian(M, t) for t in thf], "-", label="ours")
+        ax.plot(thf, [cp_newtonian(M, t) for t in thf], "-", label="Present model")
         ax.plot(th, cp_ref, "o", ms=4, label="digitized D&M")
-        ax.set_title(f"M = {key}   max|dCp| = {err.max():.3f}")
-        ax.grid(alpha=0.3)
-    axes[0, 0].set_ylabel("Cp")
-    axes[1, 0].set_ylabel("Cp")
+        ax.set_title(f"M = {key}")
+    axes[0, 0].set_ylabel("$C_p$")
+    axes[1, 0].set_ylabel("$C_p$")
     for ax in axes[1]:
-        ax.set_xlabel("local inclination [deg]")
+        ax.set_xlabel(r"$\theta$ [deg]")
     axes[0, 0].legend()
-    fig.suptitle("V1a - Modified Newtonian vs Dirkx (2017) Fig 3.5")
-    fig.tight_layout()
-    out = utils.FIGURES_DIR / "v1a_newtonian.png"
-    fig.savefig(out, dpi=150)
-    print(f"  figure -> {out}")
+    fig.suptitle("Modified Newtonian pressure coefficient (Fig. 3.5)")
+    utils.save_fig(fig, "v1a_newtonian.png")
 
 
 if __name__ == "__main__":

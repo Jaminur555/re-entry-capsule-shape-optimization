@@ -1,20 +1,9 @@
 """Exact-Apollo validation case shared by all V-scripts (Dirkx 2017, Sec. 7.2).
 
-Importing this module FIXES the shared geometry at the Apollo values for the
-whole process (config.Rm_fixed 2.0 -> 1.956 m, config.Lc_fixed 2.0 -> 2.662 m,
-matching the shape data of Hirschel & Weiland 2009 as used in the book).
-`restore_defaults()` undoes it.
-
-Conventions established here (see validation/README.md section 2):
-  - alpha:  D&M fly negative trim (~ -22 deg); our solver trims positive,
-            so alpha_DM = -alpha_ours everywhere in the overlays.
-  - Cm:     normalized by Sref*cref there vs A_ref*L_total here ->
-            Cm_DM = Cm_ours * L_total / 3.9116  (use `cm_ref_scale()`).
-  - CG:     D&M rcom = (1.0367, 0, +0.1369) m, z up. Our z-CG sign is
-            flipped w.r.t. D&M: z_cg = -0.1369 trims stably at alpha ~ +22 deg
-            (mirroring their -22 deg at M=10); the opposite sign trims at
-            negative alpha. Both offsets land INSIDE the parameterized
-            cg bounds, so the standard cg_params path is used (no patching).
+Importing FIXES config.Rm_fixed / config.Lc_fixed at the Apollo values
+(1.956 / 2.662 m) for the whole process; `restore_defaults()` undoes it.
+Sign conventions (alpha flip, Cm scaling, CG z-sign): validation/README.md
+section 2.
 
 Run the self-test from the repo root:
     python -m validation.apollo_case
@@ -33,8 +22,7 @@ APOLLO_RN, APOLLO_RM, APOLLO_RS = 4.694, 1.956, 0.196   # [m]
 APOLLO_THETA_C, APOLLO_LC = 33.0, 2.662                  # [deg], [m]
 APOLLO_CREF = 3.9116                                     # [m] = 2 * Rm
 APOLLO_RCOM = (1.0367, 0.0, 0.1369)                      # [m], D&M axes
-# Book prints Sref = 39.441 m2, inconsistent with CD ~ 1.5 in Fig 7.7;
-# pi * Rm^2 is the convention consistent with the plotted coefficients.
+# Book prints Sref = 39.441 m2 -- typo, inconsistent with Fig 7.7 (README sec 2)
 APOLLO_SREF = np.pi * APOLLO_RM ** 2                     # = 12.0173 m2
 
 # --- normalized design vars (inverse of geometry.cap_params) ------------
@@ -62,10 +50,8 @@ apply_apollo_overrides()      # module import == the process runs the Apollo cas
 def solve_cg_params():
     """Invert the CG placement so (x_cg, z_cg) lands on D&M's rcom.
 
-    Both mappings are linear, so the inversion is direct: the default-CG
-    build yields x_centroid; dz uses the local radius at the target x.
-    Sign: z_cg = -dz_over_h * h_local, and the Apollo offset needs
-    z_cg = -0.1369 (our sign convention, see module docstring).
+    Both mappings are linear, so the inversion is direct; z_cg =
+    -dz_over_h * h_local, and the Apollo offset needs z_cg = -0.1369.
     """
     base = get_capsule_properties(APOLLO_RN_NORM, APOLLO_RS_NORM,
                                   APOLLO_RTHETA_NORM, cg_params=(0.5, 0.7))
@@ -123,8 +109,8 @@ def apollo_database(rebuild=False):
 def run_entry(dt_max=2.0, t_max=7200.0):
     """Propagate the D&M validation entry (Fig 7.17 conditions); cached.
 
-    gamma0 = -4 deg (the steeper VALIDATION angle; the -2 deg default of
-    propagate_trajectory belongs to the optimization settings of book 7.3.2).
+    gamma0 = -4 deg (the validation entry; the -2 deg default is the
+    optimization case of book Sect. 7.3.2).
     """
     if "traj" not in _cache:
         from capsule_opt.trajectory.trajectory import propagate_trajectory

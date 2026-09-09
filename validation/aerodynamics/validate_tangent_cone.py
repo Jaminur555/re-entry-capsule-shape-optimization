@@ -20,14 +20,12 @@ from validation import utils
 from capsule_opt.aerodynamics.interpolation import cp_cone_interp
 from capsule_opt.aerodynamics.shocks import cp_tangent_cone
 
-BAND_CORE = 0.065    # theta <= 55 deg: correlation-vs-exact agreement band
-                     # (covers the correlation's own accuracy + digitization
-                     #  noise; worst single point is M=5 at 0.0605 near the
-                     #  detach boundary. Full-range |dCp| reported in details
-                     #  is informational only: past the exact-solution detach
-                     #  boundary the correlation keeps rising while ours
-                     #  saturates then follows Newtonian - a designed,
-                     #  documented method difference, not an error.)
+BAND_CORE = 0.065    # theta <= 55 deg: correlation accuracy + digitization
+                     # noise (worst single point M=5 at 0.0605 near detach).
+                     # Full-range |dCp| is informational only: past the
+                     # exact-solution detach boundary the correlation keeps
+                     # rising while ours saturates - a documented method
+                     # difference, not an error.
 THETA_MAX = 70.0     # production table domain is 0-75 deg
 
 
@@ -48,6 +46,7 @@ def main():
     data = curves()
 
     # --- (a) exact table vs digitized correlation -------------------------
+    utils.set_paper_style()
     fig, axes = plt.subplots(1, 3, figsize=(12, 4), sharey=True)
     for ax, M in zip(axes, (3.0, 5.0, 10.0)):
         th, cp_ref = data[M]
@@ -63,19 +62,14 @@ def main():
                          f"full={err.max():.4f} (theta<=70)")
 
         thf = np.linspace(0, THETA_MAX, 141)
-        ax.plot(thf, [cp_cone_interp(M, t) for t in thf], "-", label="ours (exact TM)")
+        ax.plot(thf, [cp_cone_interp(M, t) for t in thf], "-", label="Present model (exact TM)")
         ax.plot(th, cp_ref, "o", ms=4, label="digitized correlation")
-        ax.set_title(f"M = {M:g}   core max|dCp| = {err[core].max():.3f}")
-        ax.set_xlabel("local inclination [deg]")
-        ax.grid(alpha=0.3)
-    axes[0].set_ylabel("Cp")
+        ax.set_title(f"M = {M:g}")
+        ax.set_xlabel(r"$\theta$ [deg]")
+    axes[0].set_ylabel("$C_p$")
     axes[0].legend()
-    fig.suptitle("V1b - Tangent cone: exact Taylor-Maccoll vs Dirkx (2017) "
-                 "Fig 3.5 correlation")
-    fig.tight_layout()
-    out = utils.FIGURES_DIR / "v1b_tangent_cone.png"
-    fig.savefig(out, dpi=150)
-    print(f"  figure -> {out}")
+    fig.suptitle("Tangent-cone pressure coefficient (Fig. 3.5)")
+    utils.save_fig(fig, "v1b_tangent_cone.png")
 
     # --- (b) analytic benchmarks + production-path consistency ------------
     d = utils.load_numeric("cone_tables_reference.csv", ["mach", "theta_deg", "cp_tangent_cone"])

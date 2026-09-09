@@ -1,17 +1,9 @@
 #!/usr/bin/env python
 """Convert the PlotDigitizer extraction of Dirkx (2017) into reference CSVs.
 
-Source : ../../Extracted Data.txt   (user's PlotDigitizer export of the
-                                     motivation paper: Fig 7.7, Fig 7.17,
-                                     Figs 3.5/3.6, Fig 3.9, Table 7.1)
-Output : validation/reference_data/*.csv (long-format tables, one row per
-         digitized point, consumed by the V0-V4 scripts)
-
-Hygiene applied on purpose (see README section 5):
-  - Cp blocks exported in descending theta are sorted ascending by theta
-  - theta values grazing past 90 deg are clipped to 90
-  - comma- and tab-separated rows are both accepted
-  - full extracted precision is kept (no smoothing)
+Source: ../../Extracted Data.txt (Figs 3.5/3.6, 3.9, 7.7, 7.17, Table 7.1)
+Output: validation/reference_data/*.csv (one row per digitized point,
+consumed by the V0-V4 scripts). Hygiene per README section 5.
 
 Run:  python validation/build_reference_data.py
 """
@@ -25,6 +17,7 @@ from pathlib import Path
 import numpy as np
 
 SRC = Path(__file__).resolve().parents[2] / "Extracted Data.txt"
+NEWFIG717 = SRC.parent / "digitized_data.csv"
 OUT = Path(__file__).resolve().parent / "reference_data"
 
 # section starters (lower-cased prefix -> mode), checked before block parsing
@@ -294,6 +287,43 @@ def main():
 
     write("dm2017_table7_1.csv",
           ("quantity", "wind_tunnel", "local_inclination", "pct_diff"), table71)
+
+    # Fig 7.17 re-digitization (PlotDigitizer CSV export) supersedes the
+    # Extracted Data.txt trajectory blocks when present
+    if NEWFIG717.exists():
+        profmap = {"time_height": ("altitude_km", "time_s"),
+                   "mach_alpha": ("alpha_trim_deg", "mach"),
+                   "mach_ld": ("lift_to_drag", "mach"),
+                   "mach_bank": ("bank_angle_deg", "mach"),
+                   "mach_qcs": ("heat_rate_w_m2", "mach"),
+                   "mach_load_factor": ("load_factor_g", "mach")}
+        traj_rows = []
+        with open(NEWFIG717, newline="", encoding="utf-8-sig") as f:
+            for row in csv.DictReader(f):
+                ds = row["dataset"].strip().lower()
+                if ds in profmap and row.get("x") and row.get("y"):
+                    p, ind = profmap[ds]
+                    traj_rows.append((p, "lim", ind,
+                                      float(row["x"]), float(row["y"])))
+        traj_rows.sort(key=lambda r: (r[0], r[3]))
+
+        # stray-dropout filter for the heat-rate curve: PlotDigitizer mis-clicks
+        # sit far below the smooth curve; flag points >1.8x off a rolling
+        # median (window +-2 pts) in log space
+        idx = [i for i, r in enumerate(traj_rows) if r[0] == "heat_rate_w_m2"]
+        y = np.log10(np.array([traj_rows[i][4] for i in idx]))
+        keep = np.array([abs(y[k] - np.median(y[max(0, k - 2):k + 3]))
+                         <= np.log10(1.8) for k in range(len(y))])
+        dropped = [(traj_rows[i][3], traj_rows[i][4])
+                   for i, k in zip(idx, range(len(y))) if not keep[k]]
+        traj_rows = [r for i, r in enumerate(traj_rows) if i not in set(idx)] \
+            + [traj_rows[i] for i, k in zip(idx, range(len(y))) if keep[k]]
+        traj_rows.sort(key=lambda r: (r[0], r[3]))
+        print(f"  Fig 7.17: {len(traj_rows)} rows from {NEWFIG717.name} "
+              f"(supersedes Extracted Data.txt blocks)")
+        if dropped:
+            print(f"  heat-rate dropouts removed ({len(dropped)}): "
+                  + ", ".join(f"M={m:.2f}:{v/1e3:.0f}kW" for m, v in dropped))
 
     write("apollo_entry_reference_dm2017.csv",
           ("profile", "aero_source", "indep_name", "indep_value", "value"), traj_rows)

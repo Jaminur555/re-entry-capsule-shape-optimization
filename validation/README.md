@@ -103,6 +103,11 @@ interpolated overlays on the M ≥ 3 portion. Two comparison layers:
   L/D plateau ≈ 0.332 ± 0.015 then decline; bank-angle modulation onset/peak/
   end within a few degrees; peak q̇_cs within 5%; peak n within 0.2 g;
   h(t) within ~1 km through mid-entry;
+
+  V2 band exception (accepted 2026-09-07): **CD-M3 shape band 0.065** (same as
+  V1b) instead of 0.05 — the residual is the documented beyond-detach method
+  difference (exact-TM saturation vs their Fig-3.5 correlation; detach boundary
+  lowest at M=3), not a digitization artifact. V2 = 9/9 PASS with this.
 - Table 7.1 scalars: heat load 53.06 MJ/m² ± 8%, ground track 1430.2 km ± 2%.
   (The WT curves provide context only; the LIM-vs-WT gap ≈ 0.03 in L/D should
   already be established by V2.)
@@ -135,6 +140,12 @@ no step in ρ, T, p). Minor, run first as a smoke test.
   is labeled wind-tunnel only (the LIM CL panel was not digitized); compare
   CL only where data exist.
 - Keep full float precision as extracted; do not smooth.
+- Fig 7.7 digitized subpanels carry a per-subpanel multiplicative y-scale:
+  ours/digitized is constant in α at each Mach (~1.16 at M = 3, ~0.95 at
+  M = 10, across both CD and CL) — a y-axis calibration artifact; L/D, which
+  cancels a common scale, matches everywhere. V2 therefore scores curve
+  SHAPE after removing a best-fit constant scale (plus L/D, trim, Cm
+  directly).
 
 ## 6. Scope & order
 

@@ -1,9 +1,5 @@
-"""Shared helpers for the validation scripts.
-
-Every validate_*.py script uses these for reference-data paths, pass-band
-evaluation and result reporting, so the pass/fail trail ends up in exactly
-one place (validation/RESULTS.md + results/logs/validation_runs.json).
-"""
+"""Shared helpers for the validation scripts: reference-data paths, pass-band
+evaluation and pass/fail reporting (RESULTS.md + JSON run log)."""
 
 from __future__ import annotations
 
@@ -92,3 +88,29 @@ def within_band(values, reference, band, label=""):
         return False, float("nan")
     max_err = float(np.nanmax(err))
     return bool(np.all(err[finite] <= band)), max_err
+
+
+def set_paper_style():
+    """Shared seaborn styling for all validation figures."""
+    try:
+        import seaborn as sns
+    except ImportError:
+        return
+    import matplotlib.pyplot as plt
+    sns.set_theme(style="ticks", context="paper", font_scale=1.15,
+                  palette="colorblind")
+    plt.rcParams.update({
+        "axes.spines.top": False, "axes.spines.right": False,
+        "axes.grid": True, "grid.linestyle": "--", "grid.alpha": 0.35,
+        "legend.frameon": False, "axes.titlesize": 11,
+        "axes.labelsize": 11, "lines.linewidth": 1.8,
+        "lines.markersize": 4.5, "savefig.dpi": 300,
+    })
+
+
+def save_fig(fig, name):
+    """Save a styled figure into results/figures (300 dpi)."""
+    fig.tight_layout()
+    out = FIGURES_DIR / name
+    fig.savefig(out, dpi=300, bbox_inches="tight")
+    print(f"  figure -> {out}")

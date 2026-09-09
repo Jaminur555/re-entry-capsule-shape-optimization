@@ -55,20 +55,16 @@ def main():
                  f"max {err.max():.2f} deg at M={machs[np.argmax(err)]:.0f}")
 
     # figure
-    m_wt, a_wt = digitized("alpha_trim_deg", "wind_tunnel")
+    utils.set_paper_style()
     fig, ax = plt.subplots(figsize=(7, 5))
-    ax.plot(config.mach_nodes, atr, "o-", label="ours (exact Apollo + rcom CG)")
-    ax.plot(m_ref, a_ref, "s", ms=4, label="D&M LIM (digitized)")
-    ax.plot(m_wt[m_wt >= 3], -a_wt[m_wt >= 3], "x", ms=4, label="wind tunnel")
-    ax.set_xlabel("Mach")
-    ax.set_ylabel("trim angle of attack [deg]")
-    ax.set_title("V4a - trimmed angle of attack vs Fig 7.17a")
-    ax.grid(alpha=0.3)
+    ax.plot(config.mach_nodes, atr, "o-", label="Present model")
+    ax.plot(m_ref, a_ref, "x", color="green", ms=6,
+            label="D&M LIM (digitized)")
+    ax.set_xlabel("Mach number")
+    ax.set_ylabel(r"$\alpha_{trim}$ [deg]")
+    ax.set_title("Trim angle of attack (Fig. 7.17a)")
     ax.legend()
-    fig.tight_layout()
-    out = utils.FIGURES_DIR / "v4a_trim.png"
-    fig.savefig(out, dpi=150)
-    print(f"  figure -> {out}")
+    utils.save_fig(fig, "v4a_trim.png")
 
 
 if __name__ == "__main__":

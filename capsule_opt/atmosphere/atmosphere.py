@@ -1,26 +1,20 @@
-"""Atmospheric model: US Standard Atmosphere 1976 (0-120 km).
+"""US Standard Atmosphere 1976, 0-120 km.
 
-Below 86 km the original US-76 geopotential-layer model is used.
+Below 86 km: US-76 geopotential-layer model. Above the homopause the variable
+mean molecular weight means rho cannot be recovered from P and T with the
+sea-level gas constant, so the 86-120 km region is interpolated directly
+from the tabulated T, P, rho in config (which joins the layer model
+continuously at 86 km).
 
-Above 86 km (the homopause) the atmosphere is no longer compositionally mixed:
-the mean molecular weight falls with altitude, so density cannot be recovered
-from P and T with the constant sea-level gas constant. The 86-120 km region is
-therefore interpolated directly from the tabulated T, P, rho in
-"config.H_EXT / T_EXT / P_EXT / RHO_EXT" (USA1976 Tabulated data).
-The table's first row reproduces the US-76 86 km boundary, so the two pieces
-join continuously.
-
-Reference: NOAA/NASA, "US Standard Atmosphere 1976", US Government Printing Office.
+Reference: NOAA/NASA, "US Standard Atmosphere 1976".
 """
 
 import numpy as np
 
 from .. import config
 
-# Pre-compute the logarithms of the 86-120 km pressure and density columns once
-# at import. Pressure and density decay ~exponentially with altitude, so
-# log-linear interpolation (np.interp in log-space, then exp) is far more
-# accurate than linear interpolation across the orders of magnitude involved.
+# Log-space interpolation of the 86-120 km P and rho columns: both decay
+# ~exponentially with altitude, far beyond linear-interpolation accuracy.
 
 LNP_EXT   = np.log(config.P_EXT)
 LNRHO_EXT = np.log(config.RHO_EXT)
@@ -28,23 +22,14 @@ H_MESO    = config.H_EXT[0]      # 86000 m -- join between model and table
 
 
 def atmosphere(h):
-    """Return atmospheric properties at geometric altitude "h" [m].
-    Parameters
-    ----------
-    h : float
-        Geometric altitude [m] (clipped to [0, 120 000]).
+    """Atmospheric properties at geometric altitude "h" [m] (clipped to
+    [0, 120 000]).
 
-        0-86 km   : US-76 geopotential-layer model.
-        86-120 km : direct (log-linear) interpolation of the tabulated
-                      T, P, rho (density is not derived from the ideal-gas law,
-                      because the mean molecular weight varies above the
-                      homopause).
     Returns
     -------
     dict
-        Density 'rho' [kg m^-3], pressure 'P' [Pa], temperature 'T' [K],
-        speed of sound 'a' [m s^-1], viscosity 'mu' [Pa s],
-        geometric ('h') and geopotential ('H') altitudes.
+        'rho' [kg m^-3], 'P' [Pa], 'T' [K], 'a' [m s^-1], 'mu' [Pa s],
+        geometric 'h' and geopotential 'H' [m].
     """
     
     h = float(np.clip(h, 0.0, config.H_ATM_MAX))

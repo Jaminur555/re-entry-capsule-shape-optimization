@@ -1,8 +1,5 @@
-"""Objective integration: evaluate one capsule design end-to-end.
-
-This module is the integration point that wires together the property, aero,
-trajectory, metric and constraint modules to score a single candidate shape.
-"""
+"""Evaluate one capsule design end-to-end: properties -> aero database ->
+trajectory -> metrics -> constraints."""
 
 from .. import config
 from ..aerodynamics.aero_database import build_aero_database
@@ -17,11 +14,7 @@ def evaluate_shape(rn, rs, r_theta,
                    cg_params=(0.5, 0.7),
                    m=None,
                    entry_conditions=None):
-    """Evaluate objectives and constraints for one capsule design.
-
-    Assembles the full analysis pipeline for a candidate shape: geometric
-    properties -> aero database -> trajectory -> performance metrics ->
-    constraints.
+    """Objectives and constraints for one capsule design.
 
     Parameters
     ----------
@@ -32,8 +25,7 @@ def evaluate_shape(rn, rs, r_theta,
     m : float or None, optional
         Vehicle mass [kg]. If "None" (default), the mass is derived from the
         capsule volume via the Apollo-based constant density
-        "config.CAPSULE_DENSITY". Pass a float
-        to force a fixed mass (e.g. for a sensitivity study).
+        "config.CAPSULE_DENSITY".
     entry_conditions : dict, optional
         Overrides for the entry-interface initial conditions (any of "ho",
         "Vo", "gamma0_deg", "lat0_deg", "lon0_deg", "chi0_deg").
@@ -41,8 +33,8 @@ def evaluate_shape(rn, rs, r_theta,
     Returns
     -------
     dict
-        "objectives" ('eta_V', 'Qs', 'sg'), "constraints", the
-        "feasible" flag, the full "traj" history and a "shape" summary.
+        "objectives" ('eta_V', 'Qs', 'sg'), "constraints", the "feasible"
+        flag, the full "traj" history and a "shape" summary.
     """
 
     ec = {'ho': 120000.0, 'Vo': 7830.0, 'gamma0_deg': -2.0,

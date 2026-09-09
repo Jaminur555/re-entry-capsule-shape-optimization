@@ -1,11 +1,9 @@
 """Central configuration for the capsule shape-optimization study.
 
-Single source of truth for every tunable numerical constant: fixed geometry,
-physical constants, the US-76 atmosphere layer tables, the aero-database grid,
-the constraint limits, and the normalized design-parameter bounds.
-
-Importing this module is side-effect free apart from building the US-76 base
-pressure array "P_b" at import time (a cheap, deterministic loop).
+Single source of truth for tunable constants: fixed geometry, physical
+constants, US-76 atmosphere tables, aero-database grids, constraint limits
+and design-parameter bounds. Import builds the US-76 base-pressure array
+"P_b" (cheap, deterministic).
 """
 
 import numpy as np
@@ -82,11 +80,9 @@ for i in range(1, 8):
 #       Extended atmosphere table (86-120 km, geometric altitude)
 #============================================================================================
 
-# homopause (~86 km) the atmosphere is no longer well mixed: the mean molecular weight M drops
-# with altitude (28.96 -> ~26 kg/kmol by 120 km), so the specific gas constant R = R*/M is not
-# constant and rho cannot be recovered from P, T via the ideal-gas law with the sea-level R_air.
-# The density is therefore interpolated directly from the table (it is ~10 % below P/(R_air*T) at 120 km,
-# which is exactly the variable-composition effect).   
+# Above the homopause (~86 km) the mean molecular weight falls with altitude,
+# so rho is interpolated directly from the table, not recovered from P and T
+# via the ideal-gas law with the sea-level R_air.
 
 H_EXT   = np.array([86000, 86500, 87000, 87500, 88000, 88500, 89000, 89500, 90000,
                     90500, 91000, 91500, 92000, 92500, 93000, 93500, 94000, 94500,
