@@ -13,7 +13,8 @@ from ..trajectory import propagate_trajectory
 def evaluate_shape(rn, rs, r_theta,
                    cg_params=(0.5, 0.7),
                    m=None,
-                   entry_conditions=None):
+                   entry_conditions=None,
+                   aero_scales=None):
     """Objectives and constraints for one capsule design.
 
     Parameters
@@ -28,7 +29,8 @@ def evaluate_shape(rn, rs, r_theta,
         "config.CAPSULE_DENSITY".
     entry_conditions : dict, optional
         Overrides for the entry-interface initial conditions (any of "ho",
-        "Vo", "gamma0_deg", "lat0_deg", "lon0_deg", "chi0_deg").
+        "Vo", "gamma0_deg", "lat0_deg", "lon0_deg", "chi0_deg"), plus
+        optionally "t_max" for the propagator horizon [s].
 
     Returns
     -------
@@ -45,6 +47,18 @@ def evaluate_shape(rn, rs, r_theta,
     shape_props = get_capsule_properties(rn, rs, r_theta, cg_params=cg_params)
     interp_CD, interp_CL, interp_CM, alpha_trim_arr = build_aero_database(rn, rs, r_theta, cg_params)
 
+    # uncertainty hooks (uq/PLAN.md): model-form scales on the force interps;
+    # alpha_trim comes from the unscaled CM so trim is unaffected by design.
+    if aero_scales is not None:
+        k_CD, k_CL = aero_scales
+
+        def _scaled(interp, k):
+            def wrapped(x):
+                return k * interp(x)
+            return wrapped
+
+        interp_CD, interp_CL = _scaled(interp_CD, k_CD), _scaled(interp_CL, k_CL)
+
     # vehicle mass: Apollo-based constant-density model
     # unless a fixed mass is supplied for a sensitivity study.
     if m is None:
@@ -58,7 +72,8 @@ def evaluate_shape(rn, rs, r_theta,
         lat0_deg=ec['lat0_deg'], lon0_deg=ec['lon0_deg'], chi0_deg=ec['chi0_deg'],
         cg_params=cg_params,
         shape_props=shape_props,
-        interp_CD=interp_CD, interp_CL=interp_CL, alpha_trim_arr=alpha_trim_arr
+        interp_CD=interp_CD, interp_CL=interp_CL, alpha_trim_arr=alpha_trim_arr,
+        t_max=ec.pop('t_max', 7200.0)
     )
 
     # =================== objectives ===================

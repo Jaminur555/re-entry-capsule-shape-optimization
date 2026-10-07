@@ -16,7 +16,7 @@ from pathlib import Path
 
 import numpy as np
 
-SRC = Path(__file__).resolve().parents[2] / "Extracted Data.txt"
+SRC = Path(__file__).resolve().parents[2] / "validation_data/Extracted Data.txt"
 NEWFIG717 = SRC.parent / "digitized_data.csv"
 OUT = Path(__file__).resolve().parent / "reference_data"
 

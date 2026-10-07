@@ -2,9 +2,14 @@
 
 All validation data come from the motivation paper (Dirkx 2017, `1.dirkx2017.pdf`,
 book-page references below) and were digitized by the user in PlotDigitizer
-(`../Extracted Data.txt` at repo parent). Every check compares **our
+(`../validation_data/Extracted Data.txt` at repo parent). Every check compares **our
 `capsule_opt` implementation against the paper's own published curves**, so a
 pass certifies the code as *D&M-faithful* — the credibility claim Phase 1 needs.
+
+Manuscript-facing material lives in two companions: `RESULTS.md` (final verdicts
+and evidence tables) and `DEVIATIONS.md` (paper deviations section source:
+implementation deviations, provenance wording, guidance-law sensitivity, thesis
+corrections).
 
 ## 1. Provenance — where each dataset comes from in the paper
 

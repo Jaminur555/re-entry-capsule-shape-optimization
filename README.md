@@ -1,89 +1,147 @@
-# capsule_opt
+<div align="center">
 
-Hypersonic capsule shape optimization: a Local-Inclination-Method (LIM) aerothermodynamic
-model coupled to 3-DoF entry-trajectory simulation and multi-objective optimization,
-validated against Dirkx & Mooij, *Aerothermodynamic Design and Assessment of Space
-Vehicles* (2017). Developed from a defended MSc thesis.
+# 🛰️ capsule_opt
 
-## Progress overview
+**Robust shape optimization of a hypersonic re-entry capsule — from physics to uncertainty**
 
-| Stage | Scope | Status |
-|---|---|---|
-| Thesis (defended Jul 2026) | Modified-Newtonian aero + Sutton–Graves heating + NSGA-II shape optimization of an Apollo-class capsule | ✅ complete |
-| Model upgrade | D&M-faithful LIM aerodynamics (modified Newtonian nose, exact Taylor–Maccoll tangent-cone afterbody, Prandtl–Meyer lee, Mach-blended databases), Chapman shoulder heating, US76 + extension, rate-limited no-skip bank guidance | ✅ complete |
-| Validation V0–V4 | 20+ checks against PlotDigitizer-extracted book data on the exact Apollo entry case (V = 7.83 km/s, γ = −4°, m = 4532 kg) | ✅ complete — all model-level checks pass; trajectory-level gaps attributed with evidence (below) |
+A Local-Inclination-Method aerothermal model, a 3-DoF entry trajectory, NSGA-II shape
+optimization, and an uncertainty-quantification layer on top — validated rung by rung
+against Dirkx & Mooij, *Aerothermodynamic Design and Assessment of Space Vehicles* (2017).
 
-## Package layout
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white)
+![SciPy](https://img.shields.io/badge/SciPy-8CAAE6?style=flat-square&logo=scipy&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
+![pymoo](https://img.shields.io/badge/pymoo-NSGA--II-FF6F00?style=flat-square)
+![Validation](https://img.shields.io/badge/validation-20%2B%20checks%20passing-2EA44F?style=flat-square)
+![Status](https://img.shields.io/badge/status-Phase%202%20·%20robust%20optimization-DFB317?style=flat-square)
+
+*From a defended MSc thesis → journal manuscript in preparation.*
+
+</div>
+
+---
+
+## ✨ Highlights
+
+- **Physics-first** — modified-Newtonian nose, exact Taylor–Maccoll tangent-cone afterbody,
+  Prandtl–Meyer lee, Mach-blended databases, Sutton–Graves + Chapman heating, US76 atmosphere,
+  rate-limited no-skip bank guidance on a rotating Earth.
+- **Validated, not asserted** — 20+ checks against PlotDigitizer-extracted book data on the
+  exact Apollo entry case; the core aerodynamics check (V2) passes **9/9**.
+- **Honest uncertainty** — a 2800-run design of experiments over 3 shape parameters × 4
+  uncertain inputs, gated with out-of-fold surrogate accuracy targets *before* any
+  optimization claims.
+- **Robust by design** — deterministic vs robust optimization under entry-state and
+  aero-model-form uncertainty (work in progress).
+
+## 📍 Where it stands
+
+| Phase | Scope | Status |
+|:---|:---|:---:|
+| **Thesis** | Apollo-class capsule shape optimization (defended Jul 2026) | ✅ |
+| **Phase 1** | D&M-faithful model upgrade + V0–V4 validation suite | ✅ closed |
+| **Phase 2** | UQ: DOE → GP mixture surrogate → **gate passed** | ✅ |
+| **Step 6** | Deterministic vs robust optimization + comparison | 🔜 in progress |
+
+## 📦 Layout
 
 ```
-capsule_opt/
-  geometry/         # axisymmetric capsule profile + shape parameterization
-  properties.py     # panel discretization, part tagging (nose / afterbody), mass properties
-  aerodynamics/     # LIM pressure laws: modified Newtonian, exact Taylor-Maccoll
-                    #   tangent-cone (cached table), Prandtl-Meyer; Mach-blended databases
-  heating/          # Sutton-Graves stagnation + Chapman/Smithsonian shoulder heating
-  atmosphere/       # US76 up to 86 km + hypersonic extension to 120 km
-  trajectory/       # 3-DoF rotating-Earth entry EOM, RK4, no-skip bank guidance (rate-limited)
-  trim/             # trim angle-of-attack solver
-  optimization/     # objectives, constraints, metrics (heat load, load factor, ground track)
-main.py             # NSGA-II shape-optimization entry point (pymoo)
-validation/         # V0-V4 validation suite vs Dirkx & Mooij (2017) — see below
-data/cache/         # cached Taylor-Maccoll cone Cp table (CSV)
-results/            # generated figures + run logs
+capsule_opt/        the simulation package
+  aerodynamics/       LIM pressure laws (Newtonian · Taylor–Maccoll · Prandtl–Meyer)
+  heating/            Sutton–Graves stagnation + Chapman shoulder heating
+  atmosphere/         US76 + hypersonic extension
+  trajectory/         3-DoF rotating-Earth entry, RK4, no-skip bank guidance
+  trim/               trim angle-of-attack solver
+  geometry/           axisymmetric capsule parameterization
+  optimization/       objectives, constraints, metrics
+  uncertainty/        frozen uncertainty distributions + sampler
+validation/         Phase 1 — V0–V4 checks vs Dirkx & Mooij (2017)
+uq/                 Phase 2 — DOE, surrogate build + accuracy gate
+  data/               2800-run DOE + trajectory descriptors
+  artifacts/          trained surrogates (gitignored, regenerable)
+  diagnostics/        surrogate-development forensics
+main.py             deterministic NSGA-II optimization entry point
+data/cache/         Taylor–Maccoll cone-Cp lookup table
+results/            figures
 ```
 
-## Validation results (Phase 1, closed September 2026)
+## ✅ Phase 1 — validation against the book
+
+All checks run our implementation against the book's own published curves on the Apollo
+entry case (V = 7.83 km/s, γ = −4°, m = 4532 kg).
 
 | Check | Content | Verdict |
-|---|---|---|
-| V0 | US76 + extension vs reference tables | PASS (anchors ~2e-5) |
-| V1 | Local pressure laws vs book charts (Newtonian, tangent-cone, Prandtl-Meyer, Mach blend) | PASS |
-| V2 | **Apollo CD/CL/Cm/L/D vs book Fig 7.7 (M=3, M=10)** — the core check | **9/9 PASS** (L/D within 0.022 absolute) |
-| V3 | Heating: Zoby–Sullivan stagnation, shoulder-ratio trends vs experiment | PASS |
-| V4a | Trim angle vs book Fig 7.17a | PASS (max 0.25 deg) |
-| V4b/c | Full Apollo entry: trajectory profiles + Table 7.1 quantities | Reported with verdict — see `validation/RESULTS.md` |
+|:---|:---|:---|
+| V0 | US76 + extension vs reference tables | **PASS** (anchors ~2e-5) |
+| V1 | Local pressure laws vs book charts | **PASS** |
+| **V2** | **Apollo CD/CL/Cm/L/D vs Fig 7.7 — the core check** | **9/9 PASS** (L/D ≤ 0.022) |
+| V3 | Heating vs Zoby–Sullivan + experiment trends | **PASS** |
+| V4a | Trim angle vs Fig 7.17a | **PASS** (max 0.25°) |
+| V4b/c | Full Apollo entry: profiles + Table 7.1 | peak heat rate **0.7%**, track **−1.1%** |
 
-V4 headline results: peak heat rate matches the book to **0.7 %**; ground track
-reproducible to **−1.1 %** within the guidance-law family; peak load factor 5.1–5.3 g
-(in-family with actual Apollo flights, 5–7 g).
+<table><tr>
+<td width="50%" align="center"><img src="results/figures/v2_apollo_coefficients_M10.png"><br><sub><b>V2 — Apollo aerodynamics at M = 10</b> vs digitized book curves (LIM + NAA wind tunnel)</sub></td>
+<td width="50%" align="center"><img src="results/figures/v4b_trajectory.png"><br><sub><b>V4b — full entry profiles</b> vs digitized Fig 7.17 panels</sub></td>
+</tr></table>
 
-### Validation figures
+Residual trajectory-level gaps are **attributed with evidence to the book's internally
+inconsistent guidance spec, not to our physics** — the full forensic chain lives in
+[`validation/RESULTS.md`](validation/RESULTS.md) and
+[`validation/DEVIATIONS.md`](validation/DEVIATIONS.md).
 
-| Figure | Caption |
-|:---:|:---|
-| <img src="results/figures/v1b_tangent_cone.png" width="430"> | **V1b — tangent-cone Cp(θ).** Exact Taylor–Maccoll surface pressures vs the book's correlation chart; the only banded difference is beyond shock detachment, where the published correlation keeps rising. |
-| <img src="results/figures/v2_apollo_coefficients_M10.png" width="430"> | **V2 (core) — Apollo aerodynamics, M = 10.** CD/CL/Cm/L/D vs digitized book curves (D&M LIM + NAA wind tunnel). Our coefficients sit between the wind-tunnel data and the book's own LIM. |
-| <img src="results/figures/v2_apollo_coefficients_M3.png" width="430"> | **V2 (core) — Apollo aerodynamics, M = 3.** Same comparison at low hypersonic Mach; L/D within 0.022 absolute. |
-| <img src="results/figures/v3a_zoby_sullivan.png" width="430"> | **V3a — effective nose radius.** Zoby–Sullivan Reff chart reproduction; the Apollo design point lands on the digitized curve (design-space error ≤ 0.0143). |
-| <img src="results/figures/v4a_trim.png" width="430"> | **V4a — trim angle of attack.** Trim α(M) vs the digitized Fig 7.17a curve (green crosses): max deviation 0.25 deg. |
-| <img src="results/figures/v4b_trajectory.png" width="560"> | **V4b — full entry profiles.** Altitude, L/D, bank angle, load factor and stagnation heat rate along the Apollo validation entry vs digitized Fig 7.17 panels. |
+## 📊 Phase 2 — uncertainty & surrogate
 
-### Known deviations vs the book (documented, closed)
+**Uncertainty model** (sized from Phase 1 validation residuals — evidence-based epistemic
+uncertainty): γ₀ ~ N(−2°, 0.5°) · V₀ ~ N(7830, 50) m/s · k_CD, k_CL ~ N(1, 0.05).
 
-1. **Heat load / ground track / peak-g gaps trace to the book's guidance spec, not our physics.**
-   The book prints two mutually inconsistent bank-law equations (2.40 vs 2.41); no member of the
-   bank-law family reproduces Table 7.1 and all Fig 7.17 panels simultaneously, and the book's own
-   n-panel contradicts its own heat-rate panel (identity-based ratio 0.17–0.65 over the entry).
-   Evidence: `validation/RESULTS.md`.
-2. **Deliberate simplifications:** tangent-cone saturates past shock detachment (their published
-   correlation keeps rising — the one banded difference, CD at M=3, ≤ 0.06); Prandtl–Meyer on the
-   lee everywhere instead of empirical ACM (≤ 0.05 CD effect); no base pressure; continuous form
-   of their (inverted-as-printed) blend Eq 3.48.
+**Surrogate** — Gaussian-process mixture over 3 shape + 4 uncertain dimensions, with
+capture and trajectory-family classifiers (fast vs slow entry) in front.
 
-## Running
+5-fold out-of-fold accuracy gate, n = 2800:
 
-Requires Python >= 3.10 with `numpy scipy matplotlib pymoo` (`pip install -r requirements.txt`).
+| Output | R² | nRMSE | Verdict |
+|:---|:---:|:---:|:---|
+| Peak stagnation heat rate q̇_stag | 0.969 | 2.3% | ✅ PASS |
+| Peak load factor n_max | 0.961 | 2.2% | ✅ PASS |
+| Integrated heat load Qs | 0.983 | 2.3% | ➖ at threshold |
+| Peak shoulder heat rate q̇_shldr | 0.952 | 3.0% | ➖ at threshold |
+| Ground track s_g (fast family) | 0.932 | 3.8% | ✅ PASS |
+| Ground track s_g (slow family) | — | — | ⚠️ irreducible |
+| Family / capture classifiers | AUC 0.999 / 0.995 | — | ✅ |
+
+> **Notable finding** — the slow-family ground track is *not noise*: perturbation probes
+> show a locally linear but ~40× steeper response (ds_g/dγ₀ ≈ −2·10⁵ km/deg vs +5·10³ for
+> fast entries). Lofted entries are legitimately dispersion-dominated, so s_g is treated
+> with an explicit dispersion term rather than one average GP — a motivating result for
+> robust optimization itself.
+
+## 🚀 Running
+
+Requires Python ≥ 3.10: `pip install -r requirements.txt`
 
 ```bash
-# validation suite (from repo root; each module self-contained)
-python -m validation.build_reference_data          # rebuild reference CSVs from digitized data
-python -m validation.aerodynamics.validate_apollo_coefficients   # V2 (core)
+# Phase 1 — validation suite (each module self-contained)
+python -m validation.build_reference_data                        # rebuild reference CSVs
+python -m validation.aerodynamics.validate_apollo_coefficients   # V2 (core check)
 python -m validation.system.validate_apollo_end_to_end           # V4c
-python -m validation.system.sensitivity_bank_cl                  # guidance-law variant study
 
-# shape optimization
+# Deterministic shape optimization
 python main.py
+
+# Phase 2 — surrogate pipeline (DOE → descriptors → build + gate)
+python -m uq.doe 500
+python -m uq.doe_descriptors
+python -m uq.build_surrogate
 ```
 
-Reference data in `validation/reference_data/` was digitized (PlotDigitizer) from Dirkx & Mooij
-(2017) figures; the raw extraction is kept outside the repo alongside the source book.
+Reference data were digitized (PlotDigitizer) from Dirkx & Mooij (2017); raw extractions
+live outside the repo alongside the source book.
+
+## 📚 References
+
+- M. A. Dirkx, E. Mooij — *Aerothermodynamic Design and Assessment of Space Vehicles*,
+  Springer, 2017. (validation source; book-page refs throughout `validation/`)
+- Hirschel & Weiland — *Selected Aerothermodynamic Design Problems of Hypersonic Flight
+  Vehicles*, 2009. (Apollo geometry)
+- Plan & gate details: [`uq/PLAN.md`](uq/PLAN.md)
