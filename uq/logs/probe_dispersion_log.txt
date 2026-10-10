@@ -1,0 +1,70 @@
+﻿PROBE-0: 5 designs x 60 samples, 298 to run (~15-50 s each), t_max=14400 s
+  10/298  elapsed 4.3 min  ETA 125.2 min
+  20/298  elapsed 9.1 min  ETA 126.2 min
+  30/298  elapsed 14.3 min  ETA 128.0 min
+  40/298  elapsed 21.6 min  ETA 139.1 min
+  50/298  elapsed 26.8 min  ETA 132.9 min
+  60/298  elapsed 30.4 min  ETA 120.6 min
+  70/298  elapsed 37.2 min  ETA 121.2 min
+  80/298  elapsed 41.3 min  ETA 112.4 min
+  90/298  elapsed 44.5 min  ETA 102.9 min
+  100/298  elapsed 49.2 min  ETA 97.4 min
+  110/298  elapsed 53.3 min  ETA 91.1 min
+  120/298  elapsed 56.6 min  ETA 84.0 min
+  130/298  elapsed 61.3 min  ETA 79.2 min
+  140/298  elapsed 65.3 min  ETA 73.6 min
+  150/298  elapsed 68.7 min  ETA 67.8 min
+  160/298  elapsed 73.6 min  ETA 63.5 min
+  170/298  elapsed 77.8 min  ETA 58.6 min
+  180/298  elapsed 81.2 min  ETA 53.2 min
+  190/298  elapsed 85.5 min  ETA 48.6 min
+  200/298  elapsed 89.3 min  ETA 43.8 min
+  210/298  elapsed 92.6 min  ETA 38.8 min
+  220/298  elapsed 97.2 min  ETA 34.4 min
+  230/298  elapsed 100.9 min  ETA 29.8 min
+  240/298  elapsed 104.2 min  ETA 25.2 min
+  250/298  elapsed 109.2 min  ETA 21.0 min
+  260/298  elapsed 114.1 min  ETA 16.7 min
+  270/298  elapsed 117.6 min  ETA 12.2 min
+  280/298  elapsed 123.5 min  ETA 7.9 min
+  290/298  elapsed 127.0 min  ETA 3.5 min
+  298/298  elapsed 130.4 min  ETA 0.0 min
+
+===== Probe-0 summary (captured rows only) =====
+
+D0 rn/rs/rt = (0.5, 0.5, 0.5)   n=60 (captured 60, slow 26, P(feasible) 1.00)
+  output        mean        sigma     CV %    gate RMSE   sigma/RMSE
+  Qs             1.476e+08  3.293e+07   22.3    7.85e+06       4.20
+  q_stag_max     3.085e+05  5.487e+04   17.8   1.949e+04       2.82
+  q_shldr_max    4.754e+05  8.451e+04   17.8   3.799e+04       2.22
+  n_max              2.393     0.2482   10.4      0.1318       1.88
+
+D1 rn/rs/rt = (0.35, 0.5, 0.5)   n=60 (captured 60, slow 25, P(feasible) 1.00)
+  output        mean        sigma     CV %    gate RMSE   sigma/RMSE
+  Qs               1.5e+08  3.433e+07   22.9    7.85e+06       4.37
+  q_stag_max     3.299e+05   5.96e+04   18.1   1.949e+04       3.06
+  q_shldr_max    4.942e+05  8.924e+04   18.1   3.799e+04       2.35
+  n_max               2.58      0.257   10.0      0.1318       1.95
+
+D2 rn/rs/rt = (0.65, 0.5, 0.5)   n=60 (captured 60, slow 26, P(feasible) 0.00)
+  output        mean        sigma     CV %    gate RMSE   sigma/RMSE
+  Qs              1.47e+08  3.177e+07   21.6    7.85e+06       4.05
+  q_stag_max      2.95e+05  5.122e+04   17.4   1.949e+04       2.63
+  q_shldr_max    4.658e+05  8.081e+04   17.3   3.799e+04       2.13
+  n_max              2.247     0.2354   10.5      0.1318       1.79
+
+D3 rn/rs/rt = (0.5, 0.4, 0.65)   n=60 (captured 60, slow 25, P(feasible) 1.00)
+  output        mean        sigma     CV %    gate RMSE   sigma/RMSE
+  Qs             1.254e+08  2.773e+07   22.1    7.85e+06       3.53
+  q_stag_max     2.867e+05  5.124e+04   17.9   1.949e+04       2.63
+  q_shldr_max    4.383e+05  7.828e+04   17.9   3.799e+04       2.06
+  n_max              2.449      0.269   11.0      0.1318       2.04
+
+D4 rn/rs/rt = (0.45, 0.45, 0.25)   n=60 (captured 60, slow 29, P(feasible) 0.00)
+  output        mean        sigma     CV %    gate RMSE   sigma/RMSE
+  Qs             1.999e+08  4.387e+07   22.0    7.85e+06       5.59
+  q_stag_max     3.628e+05  5.922e+04   16.3   1.949e+04       3.04
+  q_shldr_max    5.805e+05  9.459e+04   16.3   3.799e+04       2.49
+  n_max              2.136     0.2135   10.0      0.1318       1.62
+
+Verdict rule: sigma/RMSE > ~2 -> plain std[Qs] objective OK; ~1 -> inflate with GP predictive variance.

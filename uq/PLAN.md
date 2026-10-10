@@ -113,13 +113,141 @@ float equality: eta_V 0.8347657, Qs 162660012.1, sg 8386376.6 (point 1).
   (0.5,0.5,0.5) gave sg ≈ 8386 km, feasible) — confirm the *envelope* contains
   the thesis range and note where it doesn't.
 
-## Step 6 — (week 2 preview, do not build yet)
+## Step 6 — DECIDED 2026-10-08: Option A (statistical moments)
 
-Robust formulation on the GP: E_z[f] and std_z[f] via 2000-sample MCS on the
-surrogate per candidate; deterministic-LIM baseline NSGA-II; robust NSGA-II;
-direct verification of selected Pareto points. Formulation choice (mean+std as
-4th objective vs probabilistic constraint, Ridolfi-style) — decide with Claude
-after seeing week-1 spread.
+Option B (chance constraints) rejected: reserved territory of paper #2 and
+the 2025 RESS capsule RBMDO paper, and its optima sit in the GP tails.
+
+- Objectives (4): max eta_V, min E[Qs], max E[sg], min std[Qs].
+- Constraints: pitch-stability + trim-on-nose exact (z-free geometry);
+  peaks as E[q] + 2·sigma_q <= limit (config: 700 kW/m², 1000 kW/m², 5 g);
+  P(slow) <= 0.05 via the family classifier — carries the range-dispersion
+  story, since std[sg] is not pointwise-learnable (sg-slow irreducible).
+- Machinery: det and robust fronts BOTH on the surrogate (det = surrogate at
+  nominal z0 = (-2°, 7830, 1, 1)); one fixed 2000-pt z-LHS (seed 42) reused
+  for every candidate (common random numbers → smooth fitness); post-hoc
+  fragility audit of the det front through the same engine; verification MC
+  at selected designs (simulator, overnight, resumable).
+- Probe-0 FIRST (`uq/probe_dispersion.py`, 5 designs × 60 sims, t_max=14400,
+  stages to uq/data/probe_dispersion.csv, resume-safe): true sigma_z at fixed
+  geometry vs final-gate RMSE. Verdict rule: sigma/RMSE > ~2 → plain std[Qs]
+  objective; ~1 → inflate with GP predictive variance. Smoke (2 rows, D0):
+  Qs 3.10, q_stag 2.43, q_shldr 1.94, n_max 0.26 — n_max dispersion may be
+  BELOW surrogate error → its E+2sigma constraint would be error-dominated;
+  decide after the full probe.
+
+### Step-6 machinery + pre-flight findings (2026-10-08/09, built while probe ran)
+
+- `uq/engine.py` — MomentEngine: CRN z-LHS (fixed seed) → per-candidate
+  E/sd (plain + GP-variance-inflated via law of total variance), P(peak >
+  limit), P(slow), P(capture); det point predictions at nominal z0; eta_V
+  exact. Geometry constraints surrogated (exact = aero-db build per
+  candidate): trim-existence classifier 98.5% OOF (in the DOE pitch-stable
+  <=> trim exists — 473/2800 no-trim sentinels are exactly the unstable
+  rows) + within-trim nose HGBR 98.8% sign-acc → artifacts/geom_margins.
+  Self-test (`python -m uq.engine`): DOE-row point predictions 0–8% vs CSV
+  (gate-consistent); mixture sg residuals larger on slow rows = known
+  irreducible branch.
+- `uq/optimize.py` — det/robust pymoo problems (batched), robust = 4 obj +
+  E+2·sd ≤ limit peaks (sd infl|plain) + geometry [+ P_slow ≤ budget];
+  two-tier CRN: n_z=500 in-loop (~0.65 s/cand under load), final front
+  re-evaluated at n_z=2000. Usage in module docstring; smoke-passed both
+  modes; full robust run ≈ 4–6 h at pop 150 × 200 gens.
+- `uq/diagnostics/diag_robust_feasible.py` (300-design LHS scan, n_z=500):
+  peak constraints NON-binding in the interior (98–100% feasible even at
+  E+2σ_infl — they bind only in the sharp corners the det front will hug);
+  geometry binds (~51%); **P_slow = 0.34–0.59 over the WHOLE design space →
+  any small budget is infeasible (0/300 at 0.05)** — loft probability is set
+  by the γ0 dispersion, not by geometry; corr(P_slow, E_sg) = +0.72,
+  corr(P_slow, σ_Qs_infl) = +0.74 (loft buys range with heat-load
+  dispersion). **USER DECISION 2026-10-09: P_slow is REPORT-ONLY** (no
+  constraint; carried as a coloring variable + paper finding). CLI default
+  'off' reflects this.
+
+### Both fronts done + audit (2026-10-09)
+
+Robust run: 10.5 h overnight, pop 150 × 200 gens, 100% feasible →
+`uq/data/opt_robust.csv` (n_z=2000 report columns included). Det audit
+(`uq/audit.py`, 426 s): σ_Qs median 30.3 MJ/m² (CV 22.8%), P_exc(q_stag)
+>1% on 25% of det designs (max 6.8%), P_exc(q_shldr) max 10%, P(n_max)
+≈ 0, robust-feasible 92% of det front. **Headline**: matched-performance
+pairs (E_Qs +2%, sg −2%): 5268/5371 = 98% favor robust on σ_Qs, median
+σ cut 43.5%; robust front worst-member P_exc halves (4.8%/6.6% vs
+6.8%/10%); σ floor identical on both fronts — **16.4 MJ/m² / CV 19.9% =
+irreducible dispersion floor set by the uncertainty model, not shape**.
+Strict 4-way dominance rare (30/30000) as expected. Next: figures.py +
+verification MC at selected designs.
+
+### Det baseline done (2026-10-09)
+
+`python -m uq.optimize det 200 300` — 203 s, seed 1, final pop 200 all
+feasible → `uq/data/opt_det.csv` (designs + F/G + point predictions incl.
+P_slow for the post-hoc fragility audit). Remaining: probe verdict (σ form
+for sd_Qs objective / n_max constraint) → robust run (user-launched,
+~4–6 h at pop 150 × 200 gens) → det-front audit → figures.
+
+### Knee designs + strict fronts + det sg-inflation finding (2026-10-09, `uq/knee.py`)
+
+Both final pops already strictly non-dominated at report precision (det
+200/200 on (−η_V, Qs, −sg); robust 150/150 on (−η_V, E[Qs], −E[sg], σ_Qs,infl)
+at n_z=2000, not the loop's n_z=500 F). Knees: det = row 124 (anchor-hyperplane
+knee); robust = row 51 (**pseudo-weights** — anchors degenerate: one design
+anchors both E[Qs] and σ_Qs; pw_dev 0.0059). Third column: robust design
+nearest the det knee in the (E[Qs], E[sg]) plane (fig2's ±2% window misses the
+knee by 0.05% on E[sg] — brittle threshold, nearest is parameter-free).
+Table (simulator at z0 + robust lens n_z=2000): `uq/data/knee_designs.csv` +
+`knee_sim_z0.csv` cache. Sim at z0: det knee (Rn 5.60 m, θc 37.0°, η_V 0.745)
+Qs 128.8 MJ/m², sg 7,465 km; robust knee (Rn 4.84 m, θc 21.6°, η_V 0.857) Qs
+183.9, sg 11,321 km — **the robust knee dominates the det knee nominally on
+range** despite its higher E[Qs]; matched robust design: E[Qs] −5.8%,
+E[sg] −2.1%, σ cut only **3.7%** — the det knee itself sits near the σ floor,
+so the robust advantage concentrates in the higher-performance region (fig2).
+
+**FINDING (paper material): det-front sg(z0) inflated by slow-GP
+extrapolation.** 54/200 det designs have surrogate sg(z0) > 20,015 km
+(physical great-circle max); at the det knee the slow-family GP extrapolates
+(μ_s → m_s = 101,226 km, log-sd 0.39 at z0 / up to 1.2 over the LHS) giving
+sg(z0) = 26,004 km vs simulator 7,465 km = **3.5× overprediction**; NSGA-II
+maximized sg straight into this epistemic artifact. Qs unaffected (1.7% at
+z0). Robust front clean: E_sg spans 4,117–6,393 km, no inflated designs.
+All headline comparisons (audit, fig2) already use the same CRN robust lens
+on both fronts — fair; disclose in the surrogate-limitations paragraph as
+"point-prediction optimization exploits epistemic extrapolation; the moment
+formulation self-regulates". Verification MC should include the det knee.
+
+### `uq/verify_mc.py` written + smoke-passed (2026-10-09; run = USER)
+
+5 designs x 300 true-simulator z-samples (z-LHS fixed at 500, seed 2026,
+sliced; t_max=14400): 0 det_knee, 1 rob_knee, 2 rob_matched (knee table) +
+3 det_fragile (det front max audit Pexc q_shldr — the audit headline) +
+4 rob_floor (robust front min sd_Qs_infl — the 16.4 MJ/m² floor claim).
+Resume-safe staging to uq/data/verify_mc.csv; summary compares MC vs
+MomentEngine n_z=2000 CRN: E/sd[Qs], E[sg], P_slow, P_cap, peak E+2σ and
+exceedance counts (rule of three). Smoke (2 sims) passed. Launch (from
+capsule_opt, foreground+Tee, ~10–12 h):
+`C:\Users\xamii\anaconda3\python.exe -m uq.verify_mc | Tee-Object -FilePath uq\logs\verify_mc_log.txt`
+(300 3 = knee-only ~6–7 h; summary auto-prints at end; re-run to re-print).
+
+### VERIFY-MC DONE (2026-10-10, 9.7 h): Qs / sigma / P_exc VERIFIED; E[sg] biased high
+
+5×300 sims, 0 failures, 1,499/1,500 captured (sur P_cap ~0.99), ~23 s/sim.
+Per design vs surrogate (n_z=2000 CRN):
+
+| check | result |
+|---|---|
+| E[Qs] | −3.2% … +1.4% (≤2.6 SE) across all 5 — **VERIFIED** |
+| σ_Qs (MC vs infl) | MC 15.4–65.9 vs infl 16.4–66.7 — **VERIFIED** (floor design MC 15.4 vs claimed 16.4: floor real, slightly conservative) |
+| peak E+2σ | within ~1–3% everywhere — **VERIFIED** |
+| **P_exc at det_fragile** | q_shldr **29/299 = 9.7% vs sur 10.0%**; q_stag 7.4% vs 6.8%; n_max 0.3% vs 0.2% — **audit headline CONFIRMED by true simulator** |
+| P_slow | MC 34.7–48.8% vs sur 39.1–49.0% (within ~6 pp) — OK |
+| E[sg] | **OVERPREDICTED on all 5 designs: +8.8…+28.1% (2.7–10.1 SE)** — mixture lognormal-mean inflation (same mechanism as the det-knee sg(z0) finding), now measured under the CRN |
+
+Paper handling: absolute E[sg] carries ~10–30% surrogate bias — disclose +
+report verified-true MC E[sg] for the 5 designs; matched-pair comparison
+uses E[sg] on BOTH fronts with uniform bias direction → ranking robust,
+absolute values conservative-high. The load-bearing claims (σ_Qs objective,
+E+2σ constraints, audit P_exc) are simulator-verified. Files:
+`uq/data/verify_mc.csv`, `verify_mc_summary.csv`, `uq/logs/verify_mc_log.txt`.
 
 ## Explicitly NOT in this cycle
 
